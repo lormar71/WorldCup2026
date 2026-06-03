@@ -28,5 +28,11 @@
     "away": "DEN",
     "gol_home": 5,
     "gol_away": 1
+  },
+  {
+    "home": "GER",
+    "away": "CRO",
+    "gol_home": 6,
+    "gol_away": 2
   }
 ]
