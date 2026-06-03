@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -11,7 +12,7 @@
     <header class="bg-blue-950 shadow-md border-b border-blue-900 sticky top-0 z-50">
         <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex flex-col">
-                <h1 class="text-xl font-bold tracking-tight text-white">🚀 Console Live Admin</h1>
+                <h1 class="text-xl font-bold tracking-tight text-white">🚀 Console Live Admin (Root)</h1>
                 <span id="stato-connessione" class="text-[11px] text-amber-400 font-medium">In attesa di configurazione GitHub...</span>
             </div>
             <a href="index.html" class="text-xs bg-gray-800 hover:bg-gray-700 text-gray-300 px-3 py-1.5 rounded-lg font-medium transition">Torna al Sito</a>
@@ -25,7 +26,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <div>
                     <label class="block text-[11px] text-gray-400 mb-1">Username GitHub</label>
-                    <input type="text" id="gh-user" placeholder="Es. marfisi" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                    <input type="text" id="gh-user" placeholder="Es. tuo-username" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-sm text-white focus:outline-none focus:border-blue-500">
                 </div>
                 <div>
                     <label class="block text-[11px] text-gray-400 mb-1">Nome Repository</label>
@@ -103,7 +104,7 @@
 
         <section id="pannello-salvataggio" class="bg-gray-800 rounded-xl shadow-xl p-5 border border-gray-700 opacity-40 pointer-events-none transition-all duration-300">
             <h2 class="text-base font-bold mb-1 text-emerald-400">2. Salva direttamente online</h2>
-            <p class="text-xs text-gray-400 mb-3">Cliccando il pulsante qui sotto, il file <code class="text-gray-200 font-mono">docs/risultati.json</code> verrà aggiornato istantaneamente su GitHub senza passaggi manuali.</p>
+            <p class="text-xs text-gray-400 mb-3">Cliccando il pulsante qui sotto, il file <code class="text-gray-200 font-mono">risultati.json</code> verrà aggiornato nella cartella principale del tuo repository.</p>
             <button id="btn-push-github" onclick="inviaDatiAGitHub()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3 rounded-xl text-sm shadow-md transition cursor-pointer">
                 💾 SALVA TUTTO SU GITHUB CON 1 CLICK
             </button>
@@ -112,8 +113,9 @@
     </main>
 
     <script>
+        const URL_RISULTATI = 'risultati.json'; // Legge direttamente nella root
         let elencoPartite = [];
-        let fileSha = null; // Memorizza l'ID del file necessario a GitHub per fare la sovrascrittura
+        let fileSha = null;
 
         const databaseSquadre = {
             "ARG": { nome: "Argentina" }, "FRA": { nome: "Francia" }, "ENG": { nome: "Inghilterra" }, "BEL": { nome: "Belgio" },
@@ -142,7 +144,6 @@
             selectAway.innerHTML = opzioniHtml;
         }
 
-        // Recupera le credenziali dal localStorage all'avvio
         function caricaCredenzialiLocali() {
             document.getElementById('gh-user').value = localStorage.getItem('fm_gh_user') || '';
             document.getElementById('gh-repo').value = localStorage.getItem('fm_gh_repo') || '';
@@ -173,7 +174,6 @@
             }
         }
 
-        // Funzione CORE: Scarica il file usando le API ufficiali (così prende lo SHA aggiornato)
         async function scaricaDatiDirettamenteDaGitHub() {
             const user = localStorage.getItem('fm_gh_user');
             const repo = localStorage.getItem('fm_gh_repo');
@@ -185,8 +185,8 @@
             labelStato.innerText = "🔄 Connessione a GitHub in corso...";
             labelStato.className = "text-[11px] text-amber-400 font-medium";
 
-            // Endpoint API GitHub per leggere i file del repository
-            const url = `https://api.github.com/repos/${user}/${repo}/contents/docs/risultati.json`;
+            // AGGIORNATO: L'URL punta direttamente alla root, rimuovendo "docs/"
+            const url = `https://api.github.com/repos/${user}/${repo}/contents/risultati.json`;
 
             try {
                 const res = await fetch(url, {
@@ -194,21 +194,19 @@
                 });
 
                 if (res.status === 404) {
-                    // Il file non esiste ancora, partiamo da zero
                     elencoPartite = [];
                     fileSha = null;
-                    labelStato.innerText = "🟢 Connesso (Nuovo file risultati.json verrà creato)";
+                    labelStato.innerText = "🟢 Connesso (Nuovo file risultati.json nella root)";
                     labelStato.className = "text-[11px] text-emerald-400 font-medium";
                     sbloccaPannelli();
                 } else if (res.ok) {
                     const data = await res.json();
-                    fileSha = data.sha; // Fondamentale per i futuri update!
+                    fileSha = data.sha;
                     
-                    // Decodifica il contenuto in Base64 inviato da GitHub
                     const contenutoTesto = decodeURIComponent(escape(atob(data.content)));
                     elencoPartite = contenutoTesto.trim() === "" ? [] : JSON.parse(contenutoTesto);
                     
-                    labelStato.innerText = "🟢 Connesso. File caricato correttamente.";
+                    labelStato.innerText = "🟢 Connesso. File caricato correttamente dalla root.";
                     labelStato.className = "text-[11px] text-emerald-400 font-medium";
                     sbloccaPannelli();
                 } else {
@@ -301,7 +299,7 @@
         }
 
         function cancellaPartita(index) {
-            if (confirm("Vuoi rimuovere questo match dalla lista locale? (Ricorda di cliccare sul tasto verde alla fine per confermare su GitHub)")) {
+            if (confirm("Vuoi rimuovere questo match dalla lista locale? (Ricorda di fare clic su Salva alla fine)")) {
                 elencoPartite.splice(index, 1);
                 renderTabella();
             }
@@ -317,7 +315,6 @@
             document.getElementById('btn-annulla').classList.add('hidden');
         }
 
-        // Funzione CORE 2: Fa il "Push" automatico del file JSON su GitHub
         async function inviaDatiAGitHub() {
             const user = localStorage.getItem('fm_gh_user');
             const repo = localStorage.getItem('fm_gh_repo');
@@ -327,20 +324,19 @@
             if (!user || !repo || !token) return;
 
             btn.disabled = true;
-            btn.innerText = "⏳ SALVATAGGIO IN CORSO SUI SERVER DI GITHUB...";
+            btn.innerText = "⏳ SALVATAGGIO IN CORSO NELLA ROOT DI GITHUB...";
 
-            const url = `https://api.github.com/repos/${user}/${repo}/contents/docs/risultati.json`;
+            // AGGIORNATO: Salva il file direttamente nella root, senza prefisso "docs/"
+            const url = `https://api.github.com/repos/${user}/${repo}/contents/risultati.json`;
             
-            // Converte il testo JSON in Base64 (supportando correttamente lettere accentate e caratteri speciali)
             const jsonTesto = JSON.stringify(elencoPartite, null, 2);
             const contentBase64 = btoa(unescape(encodeURIComponent(jsonTesto)));
 
             const bodyRichiesta = {
-                message: "Aggiornamento risultati da pannello admin",
+                message: "Aggiornamento risultati nella root da pannello admin",
                 content: contentBase64
             };
 
-            // Se il file esisteva già, dobbiamo passare lo SHA, altrimenti GitHub rifiuta l'aggiornamento
             if (fileSha) {
                 bodyRichiesta.sha = fileSha;
             }
@@ -357,25 +353,25 @@
 
                 if (res.ok) {
                     const data = await res.json();
-                    fileSha = data.content.sha; // Aggiorna lo SHA locale con quello nuovo generato da GitHub
-                    alert("🎉 SALVATO CON SUCCESSO! Il file risultati.json è online. Tra un minuto la classifica del sito sarà visibile a tutti aggiornata.");
+                    fileSha = data.content.sha;
+                    alert("🎉 SALVATO CON SUCCESSO! Il file risultati.json è stato sovrascritto nella root del progetto.");
                 } else {
                     const errData = await res.json();
                     throw new Error(errData.message || "Errore sconosciuto");
                 }
             } catch (e) {
-                alert("❌ Errore durante il salvataggio su GitHub: " + e.message + "\nRiprova ad effettuare la connessione.");
+                alert("❌ Errore durante il salvataggio su GitHub: " + e.message);
             } finally {
                 btn.disabled = false;
                 btn.innerText = "💾 SALVA TUTTO SU GITHUB CON 1 CLICK";
-                scaricaDatiDirettamenteDaGitHub(); // Sincronizza lo stato
+                scaricaDatiDirettamenteDaGitHub();
             }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             popolaSelectSquadre();
             caricaCredenzialiLocali();
-            scaricaDatiDirettamenteDaGitHub(); // Prova a connettersi se ci sono già vecchi dati salvati
+            scaricaDatiDirettamenteDaGitHub();
         });
     </script>
 </body>
