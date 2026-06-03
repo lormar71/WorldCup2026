@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console Admin Direct - FantaMondiale</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans antialiased pb-12">
+
+    <header class="bg-blue-950 shadow-md border-b border-blue-900 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex flex-col">
+                <h1 class="text-xl font-bold tracking-tight text-white">🚀 Console Live Admin</h1>
+                <span id="stato-connessione" class="text-[11px] text-amber-400 font-medium">In attesa di configurazione GitHub...</span>
+            </div>
+            <a href="index.html" class="text-xs bg-gray-800 hover:bg-gray-700 text-gray-300 px-3 py-1.5 rounded-lg font-medium transition">Torna al Sito</a>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 mt-6 space-y-6">
+        
+        <section class="bg-gray-800 rounded-xl shadow-xl p-5 border border-gray-700">
+            <h2 class="text-base font-bold mb-3 text-blue-400">1. Configura Accesso Diretto (Si fa una volta sola)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div>
+                    <label class="block text-[11px] text-gray-400 mb-1">Username GitHub</label>
+                    <input type="text" id="gh-user" placeholder="Es. marfisi" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-[11px] text-gray-400 mb-1">Nome Repository</label>
+                    <input type="text" id="gh-repo" placeholder="Es. fantamondiale" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-[11px] text-gray-400 mb-1">GitHub Token (ghp_...)</label>
+                    <input type="password" id="gh-token" placeholder="Incolla qui il tuo token segreto" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                </div>
+            </div>
+            <div class="mt-4 flex gap-2">
+                <button onclick="connettiEAzzera()" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-4 py-2 rounded-lg transition cursor-pointer">
+                    Salva Configurazione e Connetti
+                </button>
+                <button onclick="cancellaConfigurazione()" class="bg-gray-700 hover:bg-gray-600 text-gray-400 text-xs py-2 px-3 rounded-lg transition cursor-pointer">
+                    Disconnetti / Cancella chiavi
+                </button>
+            </div>
+        </section>
+
+        <section id="pannello-editing" class="bg-gray-800 rounded-xl shadow-xl p-5 border border-gray-700 opacity-40 pointer-events-none transition-all duration-300">
+            
+            <div class="border-b border-gray-700 pb-5 mb-5">
+                <h3 id="form-title" class="text-sm font-bold text-gray-300 uppercase tracking-wider mb-3">Aggiungi Nuova Partita</h3>
+                <input type="hidden" id="edit-index" value="-1">
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                    <div>
+                        <label class="block text-[11px] text-gray-400 mb-1 font-medium">Squadra Casa</label>
+                        <select id="match-home" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                            </select>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] text-gray-400 mb-1 font-medium">Gol Casa</label>
+                        <input type="number" id="match-gol-home" placeholder="Vuoto = Da giocare" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-sm text-white font-mono focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] text-gray-400 mb-1 font-medium">Gol Fuori</label>
+                        <input type="number" id="match-gol-away" placeholder="Vuoto = Da giocare" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-sm text-white font-mono focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] text-gray-400 mb-1 font-medium">Squadra Fuori</label>
+                        <select id="match-away" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                            </select>
+                    </div>
+                </div>
+                
+                <div class="mt-4 flex gap-2">
+                    <button onclick="salvaPartita()" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-2.5 rounded-lg transition cursor-pointer">
+                        Inserisci / Applica Modifica
+                    </button>
+                    <button id="btn-annulla" onclick="azzeraForm()" class="hidden bg-gray-700 hover:bg-gray-600 text-gray-300 text-xs font-bold px-4 rounded-lg transition cursor-pointer">
+                        Annulla
+                    </button>
+                </div>
+            </div>
+
+            <h3 class="text-sm font-bold text-gray-300 uppercase tracking-wider mb-3">Partite in Archivio</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs text-gray-300">
+                    <thead>
+                        <tr class="border-b border-gray-700 text-gray-500 uppercase">
+                            <th class="py-2">Casa</th>
+                            <th class="py-2 text-center">Risultato</th>
+                            <th class="py-2 text-right">Fuori</th>
+                            <th class="py-2 text-center w-28">Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-partite-admin" class="divide-y divide-gray-700/50">
+                        </tbody>
+                </table>
+            </div>
+
+        </section>
+
+        <section id="pannello-salvataggio" class="bg-gray-800 rounded-xl shadow-xl p-5 border border-gray-700 opacity-40 pointer-events-none transition-all duration-300">
+            <h2 class="text-base font-bold mb-1 text-emerald-400">2. Salva direttamente online</h2>
+            <p class="text-xs text-gray-400 mb-3">Cliccando il pulsante qui sotto, il file <code class="text-gray-200 font-mono">docs/risultati.json</code> verrà aggiornato istantaneamente su GitHub senza passaggi manuali.</p>
+            <button id="btn-push-github" onclick="inviaDatiAGitHub()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3 rounded-xl text-sm shadow-md transition cursor-pointer">
+                💾 SALVA TUTTO SU GITHUB CON 1 CLICK
+            </button>
+        </section>
+
+    </main>
+
+    <script>
+        let elencoPartite = [];
+        let fileSha = null; // Memorizza l'ID del file necessario a GitHub per fare la sovrascrittura
+
+        const databaseSquadre = {
+            "ARG": { nome: "Argentina" }, "FRA": { nome: "Francia" }, "ENG": { nome: "Inghilterra" }, "BEL": { nome: "Belgio" },
+            "BRA": { nome: "Brasile" }, "NED": { nome: "Paesi Bassi" }, "POR": { nome: "Portogallo" }, "ESP": { nome: "Spagna" },
+            "ITA": { nome: "Italia" }, "CRO": { nome: "Croazia" }, "USA": { nome: "Stati Uniti" }, "GER": { nome: "Germania" },
+            "MAR": { nome: "Marocco" }, "URU": { nome: "Uruguay" }, "SUI": { nome: "Svizzera" }, "COL": { nome: "Colombia" },
+            "MEX": { nome: "Messico" }, "JPN": { nome: "Giappone" }, "SEN": { nome: "Senegal" }, "IRN": { nome: "Iran" },
+            "DEN": { nome: "Danimarca" }, "KOR": { nome: "Corea del Sud" }, "AUS": { nome: "Australia" }, "UKR": { nome: "Ucraina" },
+            "AUT": { nome: "Austria" }, "SWE": { nome: "Svezia" }, "TUR": { nome: "Turchia" }, "WAL": { nome: "Galles" },
+            "POL": { nome: "Polonia" }, "HUN": { nome: "Ungheria" }, "TUN": { nome: "Tunisia" }, "ALG": { nome: "Algeria" },
+            "CHI": { nome: "Cile" }, "ECU": { nome: "Ecuador" }, "NGA": { nome: "Nigeria" }, "CMR": { nome: "Camerun" },
+            "CAN": { nome: "Canada" }, "CRC": { nome: "Costa Rica" }, "MLI": { nome: "Mali" }, "KSA": { nome: "Arabia Saudita" },
+            "RSA": { nome: "Sudafrica" }, "IRQ": { nome: "Iraq" }, "UAE": { nome: "Emirati Arabi" }, "UZB": { nome: "Uzbekistan" },
+            "OMA": { nome: "Oman" }, "HON": { nome: "Honduras" }, "BOL": { nome: "Bolivia" }, "NZL": { nome: "Nuova Zelanda" }
+        };
+
+        function popolaSelectSquadre() {
+            const selectHome = document.getElementById('match-home');
+            const selectAway = document.getElementById('match-away');
+            const squadreOrdinate = Object.keys(databaseSquadre).map(codice => ({
+                codice: codice, nome: databaseSquadre[codice].nome
+            })).sort((a, b) => a.nome.localeCompare(b.nome));
+
+            const opzioniHtml = squadreOrdinate.map(s => `<option value="${s.codice}">${s.nome} (${s.codice})</option>`).join('');
+            selectHome.innerHTML = opzioniHtml;
+            selectAway.innerHTML = opzioniHtml;
+        }
+
+        // Recupera le credenziali dal localStorage all'avvio
+        function caricaCredenzialiLocali() {
+            document.getElementById('gh-user').value = localStorage.getItem('fm_gh_user') || '';
+            document.getElementById('gh-repo').value = localStorage.getItem('fm_gh_repo') || '';
+            document.getElementById('gh-token').value = localStorage.getItem('fm_gh_token') || '';
+        }
+
+        function connettiEAzzera() {
+            const user = document.getElementById('gh-user').value.trim();
+            const repo = document.getElementById('gh-repo').value.trim();
+            const token = document.getElementById('gh-token').value.trim();
+
+            if(!user || !repo || !token) {
+                alert("Riempi tutti e tre i campi di configurazione!");
+                return;
+            }
+
+            localStorage.setItem('fm_gh_user', user);
+            localStorage.setItem('fm_gh_repo', repo);
+            localStorage.setItem('fm_gh_token', token);
+
+            scaricaDatiDirettamenteDaGitHub();
+        }
+
+        function cancellaConfigurazione() {
+            if(confirm("Vuoi disconnetterti? Dovrai reinserire i dati per salvare.")) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+
+        // Funzione CORE: Scarica il file usando le API ufficiali (così prende lo SHA aggiornato)
+        async function scaricaDatiDirettamenteDaGitHub() {
+            const user = localStorage.getItem('fm_gh_user');
+            const repo = localStorage.getItem('fm_gh_repo');
+            const token = localStorage.getItem('fm_gh_token');
+            const labelStato = document.getElementById('stato-connessione');
+
+            if (!user || !repo || !token) return;
+
+            labelStato.innerText = "🔄 Connessione a GitHub in corso...";
+            labelStato.className = "text-[11px] text-amber-400 font-medium";
+
+            // Endpoint API GitHub per leggere i file del repository
+            const url = `https://api.github.com/repos/${user}/${repo}/contents/docs/risultati.json`;
+
+            try {
+                const res = await fetch(url, {
+                    headers: { 'Authorization': `token ${token}` }
+                });
+
+                if (res.status === 404) {
+                    // Il file non esiste ancora, partiamo da zero
+                    elencoPartite = [];
+                    fileSha = null;
+                    labelStato.innerText = "🟢 Connesso (Nuovo file risultati.json verrà creato)";
+                    labelStato.className = "text-[11px] text-emerald-400 font-medium";
+                    sbloccaPannelli();
+                } else if (res.ok) {
+                    const data = await res.json();
+                    fileSha = data.sha; // Fondamentale per i futuri update!
+                    
+                    // Decodifica il contenuto in Base64 inviato da GitHub
+                    const contenutoTesto = decodeURIComponent(escape(atob(data.content)));
+                    elencoPartite = contenutoTesto.trim() === "" ? [] : JSON.parse(contenutoTesto);
+                    
+                    labelStato.innerText = "🟢 Connesso. File caricato correttamente.";
+                    labelStato.className = "text-[11px] text-emerald-400 font-medium";
+                    sbloccaPannelli();
+                } else {
+                    throw new Error("Errore token o repository");
+                }
+            } catch (e) {
+                labelStato.innerText = "🔴 Errore: Controlla Token, Username o Nome Repo!";
+                labelStato.className = "text-[11px] text-red-400 font-medium";
+                bloccaPannelli();
+            }
+        }
+
+        function sbloccaPannelli() {
+            document.getElementById('pannello-editing').classList.remove('opacity-40', 'pointer-events-none');
+            document.getElementById('pannello-salvataggio').classList.remove('opacity-40', 'pointer-events-none');
+            renderTabella();
+        }
+
+        function bloccaPannelli() {
+            document.getElementById('pannello-editing').classList.add('opacity-40', 'pointer-events-none');
+            document.getElementById('pannello-salvataggio').classList.add('opacity-40', 'pointer-events-none');
+        }
+
+        function renderTabella() {
+            const tbody = document.getElementById('lista-partite-admin');
+            if (elencoPartite.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="py-4 text-center italic text-gray-500">Nessun match presente. Inserisci il primo sopra!</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = elencoPartite.map((m, idx) => {
+                const nomeCasa = databaseSquadre[m.home]?.nome || m.home;
+                const nomeFuori = databaseSquadre[m.away]?.nome || m.away;
+                const giocata = (m.gol_home !== null && m.gol_home !== undefined && m.gol_home !== "");
+                const score = giocata ? `${m.gol_home} - ${m.gol_away}` : "Da giocare";
+                
+                return `
+                    <tr class="hover:bg-gray-700/30">
+                        <td class="py-3 font-semibold text-blue-300">${nomeCasa} <span class="text-[10px] text-gray-500 font-mono">(${m.home})</span></td>
+                        <td class="py-3 text-center font-mono ${giocata ? 'text-white font-bold' : 'text-gray-500'}">${score}</td>
+                        <td class="py-3 text-right font-semibold text-blue-300">${nomeFuori} <span class="text-[10px] text-gray-500 font-mono">(${m.away})</span></td>
+                        <td class="py-3 text-center space-x-1 flex justify-center">
+                            <button onclick="preparaModifica(${idx})" class="bg-amber-600/20 hover:bg-amber-600 text-amber-400 hover:text-white px-2 py-1 rounded transition text-[10px] font-bold cursor-pointer">EDIT</button>
+                            <button onclick="cancellaPartita(${idx})" class="bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white px-2 py-1 rounded transition text-[10px] font-bold cursor-pointer">DEL</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function salvaPartita() {
+            const home = document.getElementById('match-home').value;
+            const away = document.getElementById('match-away').value;
+            const gHomeRaw = document.getElementById('match-gol-home').value.trim();
+            const gAwayRaw = document.getElementById('match-gol-away').value.trim();
+            const index = parseInt(document.getElementById('edit-index').value);
+
+            if (home === away) {
+                alert("Errore: Una squadra non può giocare contro se stessa!");
+                return;
+            }
+
+            const nuovaPartita = {
+                home: home, away: away,
+                gol_home: gHomeRaw === "" ? null : parseInt(gHomeRaw),
+                gol_away: gAwayRaw === "" ? null : parseInt(gAwayRaw)
+            };
+
+            if (index === -1) {
+                elencoPartite.push(nuovaPartita);
+            } else {
+                elencoPartite[index] = nuovaPartita;
+            }
+
+            azzeraForm();
+            renderTabella();
+        }
+
+        function preparaModifica(index) {
+            const m = elencoPartite[index];
+            document.getElementById('edit-index').value = index;
+            document.getElementById('match-home').value = m.home;
+            document.getElementById('match-away').value = m.away;
+            document.getElementById('match-gol-home').value = m.gol_home !== null ? m.gol_home : "";
+            document.getElementById('match-gol-away').value = m.gol_away !== null ? m.gol_away : "";
+            
+            document.getElementById('form-title').innerText = `Modifica Partita #${index + 1}`;
+            document.getElementById('btn-annulla').classList.remove('hidden');
+            window.scrollTo({ top: document.getElementById('pannello-editing').offsetTop - 80, behavior: 'smooth' });
+        }
+
+        function cancellaPartita(index) {
+            if (confirm("Vuoi rimuovere questo match dalla lista locale? (Ricorda di cliccare sul tasto verde alla fine per confermare su GitHub)")) {
+                elencoPartite.splice(index, 1);
+                renderTabella();
+            }
+        }
+
+        function azzeraForm() {
+            document.getElementById('edit-index').value = "-1";
+            document.getElementById('match-home').selectedIndex = 0;
+            document.getElementById('match-away').selectedIndex = 1;
+            document.getElementById('match-gol-home').value = "";
+            document.getElementById('match-gol-away').value = "";
+            document.getElementById('form-title').innerText = "Aggiungi Nuova Partita";
+            document.getElementById('btn-annulla').classList.add('hidden');
+        }
+
+        // Funzione CORE 2: Fa il "Push" automatico del file JSON su GitHub
+        async function inviaDatiAGitHub() {
+            const user = localStorage.getItem('fm_gh_user');
+            const repo = localStorage.getItem('fm_gh_repo');
+            const token = localStorage.getItem('fm_gh_token');
+            const btn = document.getElementById('btn-push-github');
+
+            if (!user || !repo || !token) return;
+
+            btn.disabled = true;
+            btn.innerText = "⏳ SALVATAGGIO IN CORSO SUI SERVER DI GITHUB...";
+
+            const url = `https://api.github.com/repos/${user}/${repo}/contents/docs/risultati.json`;
+            
+            // Converte il testo JSON in Base64 (supportando correttamente lettere accentate e caratteri speciali)
+            const jsonTesto = JSON.stringify(elencoPartite, null, 2);
+            const contentBase64 = btoa(unescape(encodeURIComponent(jsonTesto)));
+
+            const bodyRichiesta = {
+                message: "Aggiornamento risultati da pannello admin",
+                content: contentBase64
+            };
+
+            // Se il file esisteva già, dobbiamo passare lo SHA, altrimenti GitHub rifiuta l'aggiornamento
+            if (fileSha) {
+                bodyRichiesta.sha = fileSha;
+            }
+
+            try {
+                const res = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(bodyRichiesta)
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    fileSha = data.content.sha; // Aggiorna lo SHA locale con quello nuovo generato da GitHub
+                    alert("🎉 SALVATO CON SUCCESSO! Il file risultati.json è online. Tra un minuto la classifica del sito sarà visibile a tutti aggiornata.");
+                } else {
+                    const errData = await res.json();
+                    throw new Error(errData.message || "Errore sconosciuto");
+                }
+            } catch (e) {
+                alert("❌ Errore durante il salvataggio su GitHub: " + e.message + "\nRiprova ad effettuare la connessione.");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "💾 SALVA TUTTO SU GITHUB CON 1 CLICK";
+                scaricaDatiDirettamenteDaGitHub(); // Sincronizza lo stato
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            popolaSelectSquadre();
+            caricaCredenzialiLocali();
+            scaricaDatiDirettamenteDaGitHub(); // Prova a connettersi se ci sono già vecchi dati salvati
+        });
+    </script>
+</body>
+</html>
