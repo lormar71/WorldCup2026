@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FantaMondiale 2026</title>
+    <!-- Tailwind CSS per una UI responsive, moderna e pulita -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased pb-12">
+
+    <!-- Header statico con Navbar ottimizzata per Mobile -->
+    <header class="bg-blue-900 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold tracking-tight">🏆 FantaMondiale 2026</h1>
+            <span class="bg-blue-700 text-xs px-3 py-1 rounded-full font-semibold">13 Giocatori</span>
+        </div>
+        <!-- Navbar a tre Tab -->
+        <nav class="bg-blue-950 text-sm border-t border-blue-800">
+            <div class="max-w-4xl mx-auto flex justify-around">
+                <button onclick="switchTab('tab-classifica')" id="btn-tab-classifica" class="flex-1 py-3 text-center font-medium border-b-2 border-blue-400 text-white">Classifica</button>
+                <button onclick="switchTab('tab-partite')" id="btn-tab-partite" class="flex-1 py-3 text-center font-medium border-b-2 border-transparent text-gray-400">Partite</button>
+                <button onclick="switchTab('tab-squadre')" id="btn-tab-squadre" class="flex-1 py-3 text-center font-medium border-b-2 border-transparent text-gray-400">Squadre</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 mt-6">
+        
+        <!-- SEZIONE 1: CLASSIFICA GENERALE DEI GIOCATORI -->
+        <section id="tab-classifica" class="tab-content active">
+            <div class="bg-white rounded-xl shadow-xs p-4 mb-4 border border-gray-100">
+                <h2 class="text-lg font-bold mb-3 text-gray-900">Classifica Generale</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-gray-200 text-xs text-gray-500 uppercase">
+                                <th class="py-2 w-12 text-center">Pos</th>
+                                <th class="py-2">Giocatore</th>
+                                <th class="py-2">Top (1ª)</th>
+                                <th class="py-2">Outsider (2ª)</th>
+                                <th class="py-2 text-right">Punti</th>
+                            </tr>
+                        </thead>
+                        <tbody id="corpo-classifica" class="text-sm divide-y divide-gray-100">
+                            <!-- Popolato dinamicamente da JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE 2: LISTA PARTITE E TABELLINI -->
+        <section id="tab-partite" class="tab-content">
+            <div class="bg-white rounded-xl shadow-xs p-4 border border-gray-100">
+                <h2 class="text-lg font-bold mb-3 text-gray-900">Risultati Match</h2>
+                <div id="lista-partite" class="space-y-3">
+                    <!-- Popolato dinamicamente da JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE 3: LISTA SQUADRE E MOLTIPLICATORI -->
+        <section id="tab-squadre" class="tab-content">
+            <div class="bg-white rounded-xl shadow-xs p-4 border border-gray-100">
+                <h2 class="text-lg font-bold mb-4 text-gray-900">Nazionali e Moltiplicatori</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="griglia-squadre">
+                    <!-- Popolato dinamicamente da JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // SE SEI SU GITHUB PAGES: Lascia 'risultati.json' se il file si trova nello stesso percorso.
+        // SE USI UN GIST ESTERNO: Incolla qui il link "Raw" del tuo Gist.
+        const URL_RISULTATI = 'risultati.json'; 
+
+        // Database anagrafico ufficiale delle 48 nazionali (Mondiale 2026)
+        const databaseSquadre = {
+            // FASCIA 1: Le prime 24 del Ranking FIFA (Moltiplicatori da 1.0 a 1.3)
+            "ARG": { nome: "Argentina", fascia: 1, ranking: 1, mult: 1.0 },
+            "FRA": { nome: "Francia", fascia: 1, ranking: 2, mult: 1.0 },
+            "ENG": { nome: "Inghilterra", fascia: 1, ranking: 3, mult: 1.0 },
+            "BEL": { nome: "Belgio", fascia: 1, ranking: 4, mult: 1.0 },
+            "BRA": { nome: "Brasile", fascia: 1, ranking: 5, mult: 1.0 },
+            "NED": { nome: "Paesi Bassi", fascia: 1, ranking: 6, mult: 1.1 },
+            "POR": { nome: "Portogallo", fascia: 1, ranking: 7, mult: 1.1 },
+            "ESP": { nome: "Spagna", fascia: 1, ranking: 8, mult: 1.1 },
+            "ITA": { nome: "Italia", fascia: 1, ranking: 9, mult: 1.1 },
+            "CRO": { nome: "Croazia", fascia: 1, ranking: 10, mult: 1.2 },
+            "USA": { nome: "Stati Uniti", fascia: 1, ranking: 11, mult: 1.2 },
+            "GER": { nome: "Germania", fascia: 1, ranking: 12, mult: 1.2 },
+            "MAR": { nome: "Marocco", fascia: 1, ranking: 13, mult: 1.2 },
+            "URU": { nome: "Uruguay", fascia: 1, ranking: 14, mult: 1.2 },
+            "SUI": { nome: "Svizzera", fascia: 1, ranking: 15, mult: 1.2 },
+            "COL": { nome: "Colombia", fascia: 1, ranking: 16, mult: 1.2 },
+            "MEX": { nome: "Messico", fascia: 1, ranking: 17, mult: 1.3 },
+            "JPN": { nome: "Giappone", fascia: 1, ranking: 18, mult: 1.3 },
+            "SEN": { nome: "Senegal", fascia: 1, ranking: 19, mult: 1.3 },
+            "IRN": { nome: "Iran", fascia: 20, ranking: 20, mult: 1.3 },
+            "DEN": { nome: "Danimarca", fascia: 1, ranking: 21, mult: 1.3 },
+            "KOR": { nome: "Corea del Sud", fascia: 1, ranking: 22, mult: 1.3 },
+            "AUS": { nome: "Australia", fascia: 1, ranking: 23, mult: 1.3 },
+            "UKR": { nome: "Ucraina", fascia: 1, ranking: 24, mult: 1.3 },
+
+            // FASCIA 2: Le successive 24 Outsider/Underdog (Moltiplicatori da 1.5 a 2.0)
+            "AUT": { nome: "Austria", fascia: 2, ranking: 25, mult: 1.5 },
+            "SWE": { nome: "Svezia", fascia: 2, ranking: 26, mult: 1.5 },
+            "TUR": { nome: "Turchia", fascia: 2, ranking: 27, mult: 1.5 },
+            "WAL": { nome: "Galles", fascia: 2, ranking: 28, mult: 1.5 },
+            "POL": { nome: "Polonia", fascia: 2, ranking: 30, mult: 1.5 },
+            "HUN": { nome: "Ungheria", fascia: 2, ranking: 32, mult: 1.5 },
+            "TUN": { nome: "Tunisia", fascia: 2, ranking: 36, mult: 1.6 },
+            "ALG": { nome: "Algeria", fascia: 2, ranking: 37, mult: 1.6 },
+            "CHI": { nome: "Cile", fascia: 2, ranking: 42, mult: 1.6 },
+            "ECU": { nome: "Ecuador", fascia: 2, ranking: 44, mult: 1.6 },
+            "NGA": { nome: "Nigeria", fascia: 2, ranking: 45, mult: 1.6 },
+            "CMR": { nome: "Camerun", fascia: 2, ranking: 49, mult: 1.7 },
+            "CAN": { nome: "Canada", fascia: 2, ranking: 50, mult: 1.7 },
+            "CRC": { nome: "Costa Rica", fascia: 2, ranking: 54, mult: 1.7 },
+            "MLI": { nome: "Mali", fascia: 2, ranking: 55, mult: 1.7 },
+            "KSA": { nome: "Arabia Saudita", fascia: 2, ranking: 56, mult: 1.7 },
+            "RSA": { nome: "Sudafrica", fascia: 2, ranking: 59, mult: 1.8 },
+            "IRQ": { nome: "Iraq", fascia: 2, ranking: 62, mult: 1.8 },
+            "UAE": { nome: "Emirati Arabi", fascia: 2, ranking: 67, mult: 1.8 },
+            "UZB": { nome: "Uzbekistan", fascia: 2, ranking: 68, mult: 1.8 },
+            "OMA": { nome: "Oman", fascia: 2, ranking: 76, mult: 1.9 },
+            "HON": { nome: "Honduras", fascia: 2, ranking: 78, mult: 1.9 },
+            "BOL": { nome: "Bolivia", fascia: 2, ranking: 84, mult: 2.0 },
+            "NZL": { nome: "Nuova Zelanda", fascia: 2, ranking: 85, mult: 2.0 }
+        };
+
+        // Elenco strutturato dei 13 partecipanti
+        const nomiGiocatori = [
+            "Lorenzo Marfisi", "Alessandro Bianco", "Davide Stefano", "Gianluca Campitelli", 
+            "Nicky Caporrella", "Andrea D'Intino", "Elio D'Ortona", "Lucio Di Biase", 
+            "Marco D'Orsogna Bucci", "Massimo Cocco", "Paolo Campitelli", "Stefano Luciani", "Uranio Ucci"
+        ];
+
+        // Genera accoppiamenti pseudo-casuali stabili basati sull'indice per evitare preferenze
+        function generaAssegnazioniIniziali() {
+            const topCodes = Object.keys(databaseSquadre).filter(c => databaseSquadre[c].fascia === 1);
+            const outsiderCodes = Object.keys(databaseSquadre).filter(c => databaseSquadre[c].fascia === 2);
+            
+            return nomiGiocatori.map((nome, index) => {
+                const topAssegnata = topCodes[index % topCodes.length];
+                // Salti matematici sfalsati per variare l'estrazione delle outsider
+                const outsiderAssegnata = outsiderCodes[(index * 3) % outsiderCodes.length];
+                return { nome, top: topAssegnata, outsider: outsiderAssegnata };
+            });
+        }
+
+        const listaGiocatori = generaAssegnazioniIniziali();
+
+        // Switcher dei Tab di navigazione
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            
+            document.querySelectorAll('nav button').forEach(btn => {
+                btn.classList.remove('border-blue-400', 'text-white');
+                btn.classList.add('border-transparent', 'text-gray-400');
+            });
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            activeBtn.classList.remove('border-transparent', 'text-gray-400');
+            activeBtn.classList.add('border-blue-400', 'text-white');
+        }
+
+        // Core business dell'applicazione: caricamento, calcolo dei moltiplicatori e rendering
+        async function caricaEElabora() {
+            let risultati = [];
+            try {
+                const res = await fetch(URL_RISULTATI);
+                risultati = await res.json();
+            } catch (e) {
+                console.warn("Nessun file di risultati valido trovato (o errore CORS). Avvio con risultati vuoti.");
+            }
+
+            // Inizializza/Resetta a 0 i punti accumulati di tutte le nazionali nel dizionario
+            Object.keys(databaseSquadre).forEach(c => databaseSquadre[c].puntiReali = 0);
+
+            // Analizza i gol del JSON per assegnare i punti pesati alle singole squadre
+            risultati.forEach(match => {
+                if (match.gol_home === null || match.gol_away === null || match.gol_home === undefined || match.gol_away === undefined) return;
+
+                const sqCasa = databaseSquadre[match.home];
+                const sqFuori = databaseSquadre[match.away];
+                if (!sqCasa || !sqFuori) return;
+
+                // Calcolo matematico dell'esito in base ai gol segnati
+                if (match.gol_home > match.gol_away) {
+                    sqCasa.puntiReali += 3 * sqCasa.mult;
+                } else if (match.gol_home < match.gol_away) {
+                    sqFuori.puntiReali += 3 * sqFuori.mult;
+                } else {
+                    sqCasa.puntiReali += 1 * sqCasa.mult;
+                    sqFuori.puntiReali += 1 * sqFuori.mult;
+                }
+            });
+
+            // Associa i punti accumulati dalle nazionali alle schede dei 13 amici
+            const classificaFinal = listaGiocatori.map(g => {
+                const pTop = databaseSquadre[g.top].puntiReali;
+                const pOut = databaseSquadre[g.outsider].puntiReali;
+                return {
+                    nome: g.nome,
+                    topNome: databaseSquadre[g.top].nome,
+                    outNome: databaseSquadre[g.outsider].nome,
+                    totale: parseFloat((pTop + pOut).toFixed(2)) // Previene i bug di virgola mobile di JS
+                };
+            }).sort((a, b) => b.totale - a.totale); // Ordinamento decrescente (dal 1° all'ultimo)
+
+            // INTERFACCIA 1: COSTRUZIONE TABELLA CLASSIFICA
+            const corpoClassifica = document.getElementById('corpo-classifica');
+            corpoClassifica.innerHTML = classificaFinal.map((g, idx) => `
+                <tr class="${idx === 0 ? 'bg-amber-50/70 font-semibold text-amber-950' : 'text-gray-700'}">
+                    <td class="py-3 text-center text-gray-400 font-mono">${idx + 1}°</td>
+                    <td class="py-3 font-medium text-gray-900">${g.nome}</td>
+                    <td class="py-3 text-xs text-gray-500">${g.topNome}</td>
+                    <td class="py-3 text-xs text-gray-500">${g.outNome}</td>
+                    <td class="py-3 text-right font-bold text-blue-900 text-base">${g.totale.toFixed(1)}</td>
+                </tr>
+            `).join('');
+
+            // INTERFACCIA 2: COSTRUZIONE LISTA PARTITE CON MARCATURA GOL
+            const containerPartite = document.getElementById('lista-partite');
+            if (risultati.length === 0) {
+                containerPartite.innerHTML = `
+                    <div class="text-center py-8">
+                        <p class="text-gray-400 text-sm italic">Nessun match disputato o registrato.</p>
+                        <p class="text-gray-400 text-xs mt-1">I risultati appariranno non appena aggiornerai il file JSON.</p>
+                    </div>`;
+            } else {
+                containerPartite.innerHTML = risultati.map(m => {
+                    const nomeCasa = databaseSquadre[m.home]?.nome || m.home;
+                    const nomeFuori = databaseSquadre[m.away]?.nome || m.away;
+                    
+                    const giocata = (m.gol_home !== null && m.gol_home !== undefined);
+                    const pillolaRisultato = giocata 
+                        ? `<span class="bg-blue-900 text-white font-mono text-sm px-3 py-1 rounded-md font-bold shadow-xs whitespace-nowrap">${m.gol_home} - ${m.gol_away}</span>`
+                        : `<span class="bg-gray-100 text-gray-500 text-xs px-2 py-1 rounded font-medium whitespace-nowrap">Da giocare</span>`;
+
+                    return `
+                        <div class="flex justify-between items-center bg-gray-50 px-4 py-3 rounded-xl border border-gray-100">
+                            <span class="text-sm font-semibold w-2/5 text-left truncate text-gray-800">${nomeCasa}</span>
+                            <div class="w-1/5 text-center flex justify-center">${pillolaRisultato}</div>
+                            <span class="text-sm font-semibold w-2/5 text-right truncate text-gray-800">${nomeFuori}</span>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // INTERFACCIA 3: COSTRUZIONE LISTA SQUADRE REPLICA
+            const grigliaSquadre = document.getElementById('griglia-squadre');
+            const squadreOrdinate = Object.values(databaseSquadre).sort((a,b) => a.fascia - b.fascia || a.ranking - b.ranking);
+            grigliaSquadre.innerHTML = squadreOrdinate.map(s => `
+                <div class="flex justify-between items-center px-3 py-2.5 rounded-xl border text-xs ${s.fascia === 1 ? 'border-blue-100 bg-blue-50/20' : 'border-emerald-100 bg-emerald-50/20'}">
+                    <div>
+                        <p class="font-bold text-gray-900 text-sm">${s.nome}</p>
+                        <p class="text-gray-400 text-[11px] mt-0.5">Ranking FIFA: #${s.ranking} | Fascia ${s.fascia}ª</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="font-mono bg-white border border-gray-200 px-2.5 py-1 rounded-md font-extrabold text-gray-700 text-xs shadow-2xs">x${s.mult.toFixed(1)}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Listener che attiva l'applicazione all'avvio del DOM
+        document.addEventListener('DOMContentLoaded', caricaEElabora);
+    </script>
+</body>
+</html>
