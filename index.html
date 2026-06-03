@@ -148,27 +148,21 @@
             "NZL": { nome: "Nuova Zelanda", fascia: 2, ranking: 85, mult: 2.0 }
         };
 
-        // Elenco strutturato dei 13 partecipanti
-        const nomiGiocatori = [
-            "Lorenzo Marfisi", "Alessandro Bianco", "Davide Stefano", "Gianluca Campitelli", 
-            "Nicky Caporrella", "Andrea D'Intino", "Elio D'Ortona", "Lucio Di Biase", 
-            "Marco D'Orsogna Bucci", "Massimo Cocco", "Paolo Campitelli", "Stefano Luciani", "Uranio Ucci"
+        const listaGiocatori = [
+            { nome: "Lorenzo Marfisi", top: "BRA", outsider: "PAR" },
+            { nome: "Alessandro Bianco", top: "ESP", outsider: "NZL" },
+            { nome: "Davide Stefano", top: "FRA", outsider: "CAN" },
+            { nome: "Gianluca Campitelli", top: "ARG", outsider: "CIV" },
+            { nome: "Nicky Caporrella", top: "ENG", outsider: "POL" },
+            { nome: "Andrea D'Intino", top: "POR", outsider: "SCO" },
+            { nome: "Elio D'Ortona", top: "NED", outsider: "TUN" },
+            { nome: "Lucio Di Biase", top: "MAR", outsider: "CMR" },
+            { nome: "Marco D'Orsogna Bucci", top: "BEL", outsider: "PAN" },
+            { nome: "Massimo Cocco", top: "GER", outsider: "AUS" },
+            { nome: "Paolo Campitelli", top: "CRO", outsider: "EGY" },
+            { nome: "Stefano Luciani", top: "COL", outsider: "IRN" },
+            { nome: "Uranio Ucci", top: "SEN", outsider: "QAT" }
         ];
-
-        // Genera accoppiamenti pseudo-casuali stabili basati sull'indice per evitare preferenze
-        function generaAssegnazioniIniziali() {
-            const topCodes = Object.keys(databaseSquadre).filter(c => databaseSquadre[c].fascia === 1);
-            const outsiderCodes = Object.keys(databaseSquadre).filter(c => databaseSquadre[c].fascia === 2);
-            
-            return nomiGiocatori.map((nome, index) => {
-                const topAssegnata = topCodes[index % topCodes.length];
-                // Salti matematici sfalsati per variare l'estrazione delle outsider
-                const outsiderAssegnata = outsiderCodes[(index * 3) % outsiderCodes.length];
-                return { nome, top: topAssegnata, outsider: outsiderAssegnata };
-            });
-        }
-
-        const listaGiocatori = generaAssegnazioniIniziali();
 
         // Switcher dei Tab di navigazione
         function switchTab(tabId) {
