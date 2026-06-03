@@ -22,5 +22,11 @@
     "away": "ECU",
     "gol_home": 2,
     "gol_away": 1
+  },
+  {
+    "home": "COL",
+    "away": "DEN",
+    "gol_home": 3,
+    "gol_away": 1
   }
 ]
