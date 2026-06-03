@@ -117,70 +117,60 @@
         let elencoPartite = [];
         let fileSha = null;
 
+        
         const databaseSquadre = {
 
-            // ===== FASCIA 1 (Top 24 qualificate) =====
-
+            // ===== FASCIA 1 =====
             "FRA": { nome: "Francia" },
             "ESP": { nome: "Spagna" },
-            "ARG": { nome: "Argentina"},
-            "ENG": { nome: "Inghilterra"},
-            "POR": { nome: "Portogallo"},
-            "BRA": { nome: "Brasile"},
+            "ARG": { nome: "Argentina" },
+            "ENG": { nome: "Inghilterra" },
+            "POR": { nome: "Portogallo" },
+            "BRA": { nome: "Brasile" },
+            "NED": { nome: "Paesi Bassi" },
+            "BEL": { nome: "Belgio" },
+            "GER": { nome: "Germania" },
+            "MAR": { nome: "Marocco" },
+            "CRO": { nome: "Croazia" },
+            "COL": { nome: "Colombia" },
+            "URU": { nome: "Uruguay" },
+            "SUI": { nome: "Svizzera" },
+            "JPN": { nome: "Giappone" },
+            "USA": { nome: "Stati Uniti" },
+            "MEX": { nome: "Messico" },
+            "SEN": { nome: "Senegal" },
+            "IRN": { nome: "Iran" },
+            "AUT": { nome: "Austria" },
+            "KOR": { nome: "Corea del Sud" },
+            "NOR": { nome: "Norvegia" },
+            "TUR": { nome: "Turchia" },
+            "ECU": { nome: "Ecuador" },
 
-            "NED": { nome: "Paesi Bassi"},
-            "MAR": { nome: "Marocco"},
-            "BEL": { nome: "Belgio"},
-            "GER": { nome: "Germania"},
-            "CRO": { nome: "Croazia"},
-            "COL": { nome: "Colombia"},
-
-            "SEN": { nome: "Senegal"},
-            "MEX": { nome: "Messico"},
-            "USA": { nome: "Stati Uniti"},
-            "URU": { nome: "Uruguay"},
-            "JPN": { nome: "Giappone"},
-            "SUI": { nome: "Svizzera"},
-
-            "DEN": { nome: "Danimarca"},
-            "IRN": { nome: "Iran",},
-            "TUR": { nome: "Turchia"},
-            "ECU": { nome: "Ecuador"},
-            "AUT": { nome: "Austria"},
-            "KOR": { nome: "Corea del Sud"},
-
-            // ===== FASCIA 2 (Outsider) =====
-
-            "AUS": { nome: "Australia"},
-            "ALG": { nome: "Algeria"},
-            "EGY": { nome: "Egitto"},
-            "CAN": { nome: "Canada"},
-            "NOR": { nome: "Norvegia"},
+            // ===== FASCIA 2 =====
+            "SWE": { nome: "Svezia" },
+            "CIV": { nome: "Costa d'Avorio" },
+            "PAR": { nome: "Paraguay" },
+            "AUS": { nome: "Australia" },
+            "CZE": { nome: "Rep. Ceca" },
+            "SCO": { nome: "Scozia" },
+            "EGY": { nome: "Egitto" },
+            "ALG": { nome: "Algeria" },
+            "TUN": { nome: "Tunisia" },
+            "CAN": { nome: "Canada" },
             "PAN": { nome: "Panama" },
-
-            "CIV": { nome: "Costa d'Avorio"},
-            "POL": { nome: "Polonia"},
-            "PAR": { nome: "Paraguay"},
-            "CZE": { nome: "Repubblica Ceca"},
-            "SCO": { nome: "Scozia"},
-            "TUN": { nome: "Tunisia"},
-
-            "CMR": { nome: "Camerun"},
-            "COD": { nome: "RD Congo"},
-            "UZB": { nome: "Uzbekistan"},
-            "QAT": { nome: "Qatar"},
-            "IRQ": { nome: "Iraq"},
-            "RSA": { nome: "Sudafrica"},
-
-            "KSA": { nome: "Arabia Saudita"},
-            "JOR": { nome: "Giordania"},
-            "BIH": { nome: "Bosnia-Erzegovina"},
-            "CPV": { nome: "Capo Verde"},
-            "GHA": { nome: "Ghana"},
-
-            "CUW": { nome: "Curaçao"},
-            "HTI": { nome: "Haiti"},
-            "NZL": { nome: "Nuova Zelanda"}
+            "RSA": { nome: "Sudafrica" },
+            "GHA": { nome: "Ghana" },
+            "CPV": { nome: "Capo Verde" },
+            "BIH": { nome: "Bosnia-Erzegovina" },
+            "UZB": { nome: "Uzbekistan" },
+            "IRQ": { nome: "Iraq" },
+            "JOR": { nome: "Giordania" },
+            "COD": { nome: "RD Congo" },
+            "KSA": { nome: "Arabia Saudita" },
+            "QAT": { nome: "Qatar" },
+            "CUW": { nome: "Curaçao" },
+            "HTI": { nome: "Haiti" },
+            "NZL": { nome: "Nuova Zelanda" }
         };
 
         function popolaSelectSquadre() {
