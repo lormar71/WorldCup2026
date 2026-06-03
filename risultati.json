@@ -1,38 +1,5 @@
 [
-  {
-    "home": "USA",
-    "away": "CMR",
-    "gol_home": 3,
-    "gol_away": 1
-  },
-  {
-    "home": "ITA",
-    "away": "MAR",
-    "gol_home": 1,
-    "gol_away": 1
-  },
-  {
-    "home": "ARG",
-    "away": "NZL",
-    "gol_home": 0,
-    "gol_away": 2
-  },
-  {
-    "home": "UAE",
-    "away": "ECU",
-    "gol_home": 2,
-    "gol_away": 1
-  },
-  {
-    "home": "COL",
-    "away": "DEN",
-    "gol_home": 5,
-    "gol_away": 1
-  },
-  {
-    "home": "GER",
-    "away": "CRO",
-    "gol_home": 6,
-    "gol_away": 2
-  }
+  { "home": "USA", "away": "CMR", "gol_home": 3, "gol_away": 1 },
+  { "home": "URU", "away": "MAR", "gol_home": 1, "gol_away": 1 },
+  { "home": "ARG", "away": "NZL", "gol_home": 0, "gol_away": 2 }
 ]
