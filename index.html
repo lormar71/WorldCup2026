@@ -17,7 +17,7 @@
     <header class="bg-blue-900 text-white shadow-md sticky top-0 z-50">
         <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
             <h1 class="text-xl font-bold tracking-tight">🏆 FantaMondiale 2026</h1>
-            <span class="bg-blue-700 text-xs px-3 py-1 rounded-full font-semibold">13 Giocatori</span>
+            <span class="bg-blue-700 text-xs px-3 py-1 rounded-full font-semibold">12 Giocatori</span>
         </div>
         <!-- Navbar a tre Tab -->
         <nav class="bg-blue-950 text-sm border-t border-blue-800">
@@ -84,72 +84,71 @@
         const databaseSquadre = {
 
             // ===== FASCIA 1 =====
-            "FRA": { nome: "Francia", fascia: 1, ranking: 1, mult: 1.0 },
-            "ESP": { nome: "Spagna", fascia: 1, ranking: 2, mult: 1.0 },
-            "ARG": { nome: "Argentina", fascia: 1, ranking: 3, mult: 1.0 },
-            "ENG": { nome: "Inghilterra", fascia: 1, ranking: 4, mult: 1.0 },
-            "POR": { nome: "Portogallo", fascia: 1, ranking: 5, mult: 1.0 },
-            "BRA": { nome: "Brasile", fascia: 1, ranking: 6, mult: 1.1 },
-            "NED": { nome: "Paesi Bassi", fascia: 1, ranking: 7, mult: 1.1 },
-            "BEL": { nome: "Belgio", fascia: 1, ranking: 8, mult: 1.1 },
-            "GER": { nome: "Germania", fascia: 1, ranking: 9, mult: 1.1 },
-            "MAR": { nome: "Marocco", fascia: 1, ranking: 10, mult: 1.1 },
-            "CRO": { nome: "Croazia", fascia: 1, ranking: 11, mult: 1.2 },
-            "COL": { nome: "Colombia", fascia: 1, ranking: 12, mult: 1.2 },
-            "URU": { nome: "Uruguay", fascia: 1, ranking: 13, mult: 1.2 },
-            "SUI": { nome: "Svizzera", fascia: 1, ranking: 14, mult: 1.2 },
-            "JPN": { nome: "Giappone", fascia: 1, ranking: 15, mult: 1.2 },
-            "USA": { nome: "Stati Uniti", fascia: 1, ranking: 16, mult: 1.2 },
-            "MEX": { nome: "Messico", fascia: 1, ranking: 17, mult: 1.3 },
-            "SEN": { nome: "Senegal", fascia: 1, ranking: 18, mult: 1.3 },
-            "IRN": { nome: "Iran", fascia: 1, ranking: 19, mult: 1.3 },
-            "AUT": { nome: "Austria", fascia: 1, ranking: 20, mult: 1.3 },
-            "KOR": { nome: "Corea del Sud", fascia: 1, ranking: 21, mult: 1.3 },
-            "NOR": { nome: "Norvegia", fascia: 1, ranking: 22, mult: 1.3 },
-            "TUR": { nome: "Turchia", fascia: 1, ranking: 23, mult: 1.3 },
-            "ECU": { nome: "Ecuador", fascia: 1, ranking: 24, mult: 1.3 },
+            "FRA": { nome: "Francia",            fascia: 1, ranking:  1, mult_v: 3.00, mult_p: 1.00 },
+            "ESP": { nome: "Spagna",             fascia: 1, ranking:  2, mult_v: 3.00, mult_p: 1.00 },
+            "ARG": { nome: "Argentina",          fascia: 1, ranking:  3, mult_v: 3.00, mult_p: 1.00 },
+            "ENG": { nome: "Inghilterra",        fascia: 1, ranking:  4, mult_v: 3.08, mult_p: 1.03 },
+            "POR": { nome: "Portogallo",         fascia: 1, ranking:  5, mult_v: 3.19, mult_p: 1.06 },
+            "BRA": { nome: "Brasile",            fascia: 1, ranking:  6, mult_v: 3.20, mult_p: 1.07 },
+            "NED": { nome: "Paesi Bassi",        fascia: 1, ranking:  7, mult_v: 3.20, mult_p: 1.07 },
+            "MAR": { nome: "Marocco",            fascia: 1, ranking:  8, mult_v: 3.21, mult_p: 1.07 },
+            "BEL": { nome: "Belgio",             fascia: 1, ranking:  9, mult_v: 3.25, mult_p: 1.08 },
+            "GER": { nome: "Germania",           fascia: 1, ranking: 10, mult_v: 3.25, mult_p: 1.08 },
+            "CRO": { nome: "Croazia",            fascia: 1, ranking: 11, mult_v: 3.28, mult_p: 1.09 },
+            "COL": { nome: "Colombia",           fascia: 1, ranking: 12, mult_v: 3.33, mult_p: 1.11 },
+            "SEN": { nome: "Senegal",            fascia: 1, ranking: 13, mult_v: 3.33, mult_p: 1.11 },
+            "MEX": { nome: "Messico",            fascia: 1, ranking: 14, mult_v: 3.35, mult_p: 1.12 },
+            "USA": { nome: "Stati Uniti",        fascia: 1, ranking: 15, mult_v: 3.37, mult_p: 1.12 },
+            "URU": { nome: "Uruguay",            fascia: 1, ranking: 16, mult_v: 3.37, mult_p: 1.12 },
+            "JPN": { nome: "Giappone",           fascia: 1, ranking: 17, mult_v: 3.39, mult_p: 1.13 },
+            "SUI": { nome: "Svizzera",           fascia: 1, ranking: 18, mult_v: 3.41, mult_p: 1.14 },
+            "IRN": { nome: "Iran",               fascia: 1, ranking: 19, mult_v: 3.48, mult_p: 1.16 },
+            "KOR": { nome: "Corea del Sud",      fascia: 1, ranking: 20, mult_v: 3.50, mult_p: 1.17 },
 
             // ===== FASCIA 2 =====
-            "SWE": { nome: "Svezia", fascia: 2, ranking: 25, mult: 1.4 },
-            "CIV": { nome: "Costa d'Avorio", fascia: 2, ranking: 26, mult: 1.4 },
-            "PAR": { nome: "Paraguay", fascia: 2, ranking: 27, mult: 1.4 },
-            "AUS": { nome: "Australia", fascia: 2, ranking: 28, mult: 1.4 },
-            "CZE": { nome: "Rep. Ceca", fascia: 2, ranking: 29, mult: 1.4 },
-            "SCO": { nome: "Scozia", fascia: 2, ranking: 30, mult: 1.5 },
-            "EGY": { nome: "Egitto", fascia: 2, ranking: 31, mult: 1.5 },
-            "ALG": { nome: "Algeria", fascia: 2, ranking: 32, mult: 1.5 },
-            "TUN": { nome: "Tunisia", fascia: 2, ranking: 33, mult: 1.5 },
-            "CAN": { nome: "Canada", fascia: 2, ranking: 34, mult: 1.5 },
-            "PAN": { nome: "Panama", fascia: 2, ranking: 35, mult: 1.6 },
-            "RSA": { nome: "Sudafrica", fascia: 2, ranking: 36, mult: 1.6 },
-            "GHA": { nome: "Ghana", fascia: 2, ranking: 37, mult: 1.6 },
-            "CPV": { nome: "Capo Verde", fascia: 2, ranking: 38, mult: 1.6 },
-            "BIH": { nome: "Bosnia-Erzegovina", fascia: 2, ranking: 39, mult: 1.6 },
-            "UZB": { nome: "Uzbekistan", fascia: 2, ranking: 40, mult: 1.7 },
-            "IRQ": { nome: "Iraq", fascia: 2, ranking: 41, mult: 1.7 },
-            "JOR": { nome: "Giordania", fascia: 2, ranking: 42, mult: 1.7 },
-            "COD": { nome: "RD Congo", fascia: 2, ranking: 43, mult: 1.8 },
-            "KSA": { nome: "Arabia Saudita", fascia: 2, ranking: 44, mult: 1.8 },
-            "QAT": { nome: "Qatar", fascia: 2, ranking: 45, mult: 1.8 },
-            "CUW": { nome: "Curaçao", fascia: 2, ranking: 46, mult: 1.9 },
-            "HTI": { nome: "Haiti", fascia: 2, ranking: 47, mult: 1.9 },
-            "NZL": { nome: "Nuova Zelanda", fascia: 2, ranking: 48, mult: 2.0 }
+            "AUT": { nome: "Austria",            fascia: 2, ranking: 21, mult_v: 3.52, mult_p: 1.17 },
+            "ECU": { nome: "Ecuador",            fascia: 2, ranking: 22, mult_v: 3.52, mult_p: 1.17 },
+            "TUR": { nome: "Turchia",            fascia: 2, ranking: 23, mult_v: 3.56, mult_p: 1.19 },
+            "AUS": { nome: "Australia",          fascia: 2, ranking: 24, mult_v: 3.58, mult_p: 1.19 },
+            "NOR": { nome: "Norvegia",           fascia: 2, ranking: 25, mult_v: 3.61, mult_p: 1.20 },
+            "CAN": { nome: "Canada",             fascia: 2, ranking: 26, mult_v: 3.68, mult_p: 1.23 }, 
+            "PAR": { nome: "Paraguay",           fascia: 2, ranking: 27, mult_v: 3.78, mult_p: 1.26 },
+            "SCO": { nome: "Scozia",             fascia: 2, ranking: 28, mult_v: 3.78, mult_p: 1.26 },
+            "SWE": { nome: "Svezia",             fascia: 2, ranking: 29, mult_v: 3.78, mult_p: 1.26 },
+            "BIH": { nome: "Bosnia-Erzegovina",  fascia: 2, ranking: 30, mult_v: 3.80, mult_p: 1.27 },
+            "CZE": { nome: "Rep. Ceca",          fascia: 2, ranking: 31, mult_v: 3.79, mult_p: 1.26 },  
+            "ALG": { nome: "Algeria",            fascia: 2, ranking: 32, mult_v: 3.86, mult_p: 1.29 },
+            "KSA": { nome: "Arabia Saudita",     fascia: 2, ranking: 33, mult_v: 3.97, mult_p: 1.32 },
+            "QAT": { nome: "Qatar",              fascia: 2, ranking: 34, mult_v: 3.99, mult_p: 1.33 },
+            "TUN": { nome: "Tunisia",            fascia: 2, ranking: 35, mult_v: 4.02, mult_p: 1.34 },
+            "IRQ": { nome: "Iraq",               fascia: 2, ranking: 36, mult_v: 4.05, mult_p: 1.35 },
+            "RSA": { nome: "Sudafrica",          fascia: 2, ranking: 37, mult_v: 4.08, mult_p: 1.36 },
+            "CIV": { nome: "Costa d'Avorio",     fascia: 2, ranking: 38, mult_v: 4.10, mult_p: 1.37 },
+            "EGY": { nome: "Egitto",             fascia: 2, ranking: 39, mult_v: 4.11, mult_p: 1.37 },
+            "UZB": { nome: "Uzbekistan",         fascia: 2, ranking: 40, mult_v: 4.30, mult_p: 1.43 },
+            "PAN": { nome: "Panama",             fascia: 2, ranking: 41, mult_v: 4.33, mult_p: 1.44 },
+            "JOR": { nome: "Giordania",          fascia: 2, ranking: 42, mult_v: 4.40, mult_p: 1.47 },
+            "GHA": { nome: "Ghana",              fascia: 2, ranking: 43, mult_v: 4.47, mult_p: 1.49 },
+            "COD": { nome: "RD Congo",           fascia: 2, ranking: 44, mult_v: 4.50, mult_p: 1.50 },
+            "CPV": { nome: "Capo Verde",         fascia: 2, ranking: 45, mult_v: 4.62, mult_p: 1.54 },
+            "CUW": { nome: "Curaçao",            fascia: 2, ranking: 46, mult_v: 4.90, mult_p: 1.63 },
+            "HTI": { nome: "Haiti",              fascia: 2, ranking: 47, mult_v: 5.12, mult_p: 1.71 },
+            "NZL": { nome: "Nuova Zelanda",      fascia: 2, ranking: 48, mult_v: 5.31, mult_p: 1.77 }           
         };
 
         const listaGiocatori = [
-            { nome: "Lorenzo Marfisi", top: "BRA", outsider: "PAR" },
-            { nome: "Alessandro Bianco", top: "ESP", outsider: "HTI" },
-            { nome: "Davide Stefano", top: "FRA", outsider: "CAN" },
-            { nome: "Gianluca Campitelli", top: "ARG", outsider: "CIV" },
-            { nome: "Nicky Caporrella", top: "ENG", outsider: "SWE" },
-            { nome: "Andrea D'Intino", top: "POR", outsider: "SCO" },
-            { nome: "Elio D'Ortona", top: "NED", outsider: "TUN" },
-            { nome: "Lucio Di Biase", top: "MAR", outsider: "KSA" },
-            { nome: "Marco D'Orsogna Bucci", top: "BEL", outsider: "PAN" },
-            { nome: "Massimo Cocco", top: "GER", outsider: "AUS" },
-            { nome: "Paolo Campitelli", top: "CRO", outsider: "EGY" },
-            { nome: "Stefano Luciani", top: "COL", outsider: "NZL" },
-            { nome: "Uranio Ucci", top: "SEN", outsider: "QAT" }
+            { nome: "Alessandro", top: "ENG", outsider: "TUR" },
+            { nome: "Andrea", top: "GER", outsider: "TUR" },
+            { nome: "Davide", top: "ESP", outsider: "TUR" },
+            { nome: "Elio", top: "FRA", outsider: "CAN" },
+            { nome: "Lorenzo", top: "ENG", outsider: "ALG" },  
+            { nome: "Lucio", top: "BRA", outsider: "TUR" },
+            { nome: "Marco", top: "NED", outsider: "NOR" },
+            { nome: "Massimo", top: "ESP", outsider: "NOR" },
+            { nome: "Nicky", top: "POR", outsider: "NOR" },
+            { nome: "Paolo", top: "GER", outsider: "NOR" },
+            { nome: "Stefano", top: "POR", outsider: "ECU" },
+            { nome: "Uranio", top: "NED", outsider: "SWE" }
         ];
 
         // Switcher dei Tab di navigazione
@@ -189,12 +188,12 @@
 
                 // Calcolo matematico dell'esito in base ai gol segnati
                 if (match.gol_home > match.gol_away) {
-                    sqCasa.puntiReali += 3 * sqCasa.mult;
+                    sqCasa.puntiReali += sqCasa.mult_v;
                 } else if (match.gol_home < match.gol_away) {
-                    sqFuori.puntiReali += 3 * sqFuori.mult;
+                    sqFuori.puntiReali += sqFuori.mult_v;
                 } else {
-                    sqCasa.puntiReali += 1 * sqCasa.mult;
-                    sqFuori.puntiReali += 1 * sqFuori.mult;
+                    sqCasa.puntiReali += sqCasa.mult_p;
+                    sqFuori.puntiReali += sqFuori.mult_p;
                 }
             });
 
@@ -259,8 +258,9 @@
                         <p class="font-bold text-gray-900 text-sm">${s.nome}</p>
                         <p class="text-gray-400 text-[11px] mt-0.5">Ranking FIFA: #${s.ranking} | Fascia ${s.fascia}ª</p>
                     </div>
-                    <div class="text-right">
-                        <span class="font-mono bg-white border border-gray-200 px-2.5 py-1 rounded-md font-extrabold text-gray-700 text-xs shadow-2xs">x${s.mult.toFixed(1)}</span>
+                    <div class="flex gap-1 text-right">
+                        <span class="font-mono bg-amber-50 border border-amber-200 px-2 py-1 rounded-md font-extrabold text-amber-700 text-xs shadow-2xs">V ${s.mult_v.toFixed(2)}</span>
+                        <span class="font-mono bg-sky-50 border border-sky-200 px-2 py-1 rounded-md font-extrabold text-sky-700 text-xs shadow-2xs">P ${s.mult_p.toFixed(2)}</span>
                     </div>
                 </div>
             `).join('');
