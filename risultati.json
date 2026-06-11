@@ -10,5 +10,11 @@
     "away": "EGY",
     "gol_home": 2,
     "gol_away": 0
+  },
+  {
+    "home": "GER",
+    "away": "TUR",
+    "gol_home": 1,
+    "gol_away": 1
   }
 ]
