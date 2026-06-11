@@ -169,7 +169,7 @@
         async function caricaEElabora() {
             let risultati = [];
             try {
-                const res = await fetch(URL_RISULTATI);
+                const res = await fetch(URL_RISULTATI, { cache: 'no-store' });
                 risultati = await res.json();
             } catch (e) {
                 console.warn("Nessun file di risultati valido trovato (o errore CORS). Avvio con risultati vuoti.");
