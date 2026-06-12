@@ -10,5 +10,11 @@
     "away": "CZE",
     "gol_home": 2,
     "gol_away": 1
+  },
+  {
+    "home": "CAN",
+    "away": "BIH",
+    "gol_home": 0,
+    "gol_away": 0
   }
 ]
