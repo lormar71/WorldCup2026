@@ -4,5 +4,11 @@
     "away": "RSA",
     "gol_home": 2,
     "gol_away": 0
+  },
+  {
+    "home": "KOR",
+    "away": "CZE",
+    "gol_home": 2,
+    "gol_away": 1
   }
 ]
