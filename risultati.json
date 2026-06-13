@@ -16,5 +16,11 @@
     "away": "BIH",
     "gol_home": 1,
     "gol_away": 1
+  },
+  {
+    "home": "USA",
+    "away": "PAR",
+    "gol_home": 4,
+    "gol_away": 1
   }
 ]
