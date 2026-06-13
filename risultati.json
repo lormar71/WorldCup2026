@@ -22,5 +22,11 @@
     "away": "PAR",
     "gol_home": 4,
     "gol_away": 1
+  },
+  {
+    "home": "QAT",
+    "away": "SUI",
+    "gol_home": 0,
+    "gol_away": 1
   }
 ]
