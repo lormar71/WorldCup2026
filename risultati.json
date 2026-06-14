@@ -34,5 +34,17 @@
     "away": "MAR",
     "gol_home": 1,
     "gol_away": 1
+  },
+  {
+    "home": "HTI",
+    "away": "SCO",
+    "gol_home": 0,
+    "gol_away": 1
+  },
+  {
+    "home": "AUS",
+    "away": "TUR",
+    "gol_home": 2,
+    "gol_away": 0
   }
 ]
