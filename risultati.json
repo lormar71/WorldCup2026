@@ -52,5 +52,11 @@
     "away": "CUW",
     "gol_home": 7,
     "gol_away": 1
+  },
+  {
+    "home": "NED",
+    "away": "JPN",
+    "gol_home": 0,
+    "gol_away": 0
   }
 ]
