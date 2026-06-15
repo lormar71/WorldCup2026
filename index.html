@@ -10,6 +10,18 @@
     <style>
         .tab-content { display: none; }
         .tab-content.active { display: block; }
+        @keyframes ticker {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+        #ticker-track {
+            display: inline-flex;
+            align-items: center;
+            gap: 0;
+            white-space: nowrap;
+            animation: ticker 60s linear infinite;
+        }
+        #ticker-track:hover { animation-play-state: paused; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased pb-12">
@@ -29,6 +41,10 @@
             </div>
         </nav>
     </header>
+
+    <div id="news-ticker" class="bg-blue-950 border-b border-blue-800 overflow-hidden py-1.5 hidden">
+        <div id="ticker-track" class="text-xs text-blue-200"></div>
+    </div>
 
     <main class="max-w-4xl mx-auto px-4 mt-6">
         
@@ -288,8 +304,28 @@
             `).join('');
         }
 
+        async function caricaTicker() {
+            const rss = 'https://news.google.com/rss/search?q=mondiali+2026+fifa&hl=it&gl=IT&ceid=IT:it';
+            try {
+                const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rss)}`);
+                const data = await res.json();
+                if (data.status !== 'ok' || !data.items?.length) return;
+
+                const sep = '<span class="mx-8 text-blue-700">⚽</span>';
+                const html = data.items.map(item =>
+                    `<a href="${item.link}" target="_blank" rel="noopener noreferrer"
+                        class="text-blue-200 hover:text-white transition-colors duration-150">${item.title}</a>`
+                ).join(sep);
+
+                const track = document.getElementById('ticker-track');
+                track.innerHTML = html + sep + html; // duplicato per loop seamless
+                track.style.animationDuration = `${data.items.length * 6}s`;
+                document.getElementById('news-ticker').classList.remove('hidden');
+            } catch (e) { /* ticker non mostrato se offline o errore */ }
+        }
+
         // Listener che attiva l'applicazione all'avvio del DOM
-        document.addEventListener('DOMContentLoaded', caricaEElabora);
+        document.addEventListener('DOMContentLoaded', () => { caricaEElabora(); caricaTicker(); });
     </script>
 </body>
 </html>
