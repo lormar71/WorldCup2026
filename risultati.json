@@ -58,5 +58,17 @@
     "away": "JPN",
     "gol_home": 2,
     "gol_away": 2
+  },
+  {
+    "home": "CIV",
+    "away": "ECU",
+    "gol_home": 1,
+    "gol_away": 0
+  },
+  {
+    "home": "SWE",
+    "away": "TUN",
+    "gol_home": 5,
+    "gol_away": 1
   }
 ]
