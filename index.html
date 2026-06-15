@@ -80,7 +80,21 @@
     <script>
         // SE SEI SU GITHUB PAGES: Lascia 'risultati.json' se il file si trova nello stesso percorso.
         // SE USI UN GIST ESTERNO: Incolla qui il link "Raw" del tuo Gist.
-        const URL_RISULTATI = 'risultati.json'; 
+        const URL_RISULTATI = 'risultati.json';
+
+        const flagMap = {
+            "FRA":"fr","ESP":"es","ARG":"ar","ENG":"gb-eng","POR":"pt","BRA":"br","NED":"nl",
+            "MAR":"ma","BEL":"be","GER":"de","CRO":"hr","COL":"co","SEN":"sn","MEX":"mx",
+            "USA":"us","URU":"uy","JPN":"jp","SUI":"ch","IRN":"ir","KOR":"kr","AUT":"at",
+            "ECU":"ec","TUR":"tr","AUS":"au","NOR":"no","CAN":"ca","PAR":"py","SCO":"gb-sct",
+            "SWE":"se","BIH":"ba","CZE":"cz","ALG":"dz","KSA":"sa","QAT":"qa","TUN":"tn",
+            "IRQ":"iq","RSA":"za","CIV":"ci","EGY":"eg","UZB":"uz","PAN":"pa","JOR":"jo",
+            "GHA":"gh","COD":"cd","CPV":"cv","CUW":"cw","HTI":"ht","NZL":"nz"
+        };
+        const getFlag = c => {
+            const f = flagMap[c];
+            return f ? `<img src="https://flagcdn.com/20x15/${f}.png" alt="${c}" style="height:13px;width:auto;vertical-align:middle;border-radius:2px;display:inline-block;">` : '';
+        };
 
         const databaseSquadre = {
 
@@ -204,7 +218,9 @@
                 const pOut = databaseSquadre[g.outsider].puntiReali;
                 return {
                     nome: g.nome,
+                    topCod: g.top,
                     topNome: databaseSquadre[g.top].nome,
+                    outCod: g.outsider,
                     outNome: databaseSquadre[g.outsider].nome,
                     totale: parseFloat((pTop + pOut).toFixed(2)) // Previene i bug di virgola mobile di JS
                 };
@@ -217,8 +233,8 @@
                 <tr class="${idx === 0 ? 'bg-amber-50/70 font-semibold text-amber-950' : 'text-gray-700'}">
                     <td class="py-3 text-center text-gray-400 font-mono">${idx + 1}</td>
                     <td class="py-3 font-medium text-gray-900">${g.nome} ${idx < 3 ? medaglie[idx] + ' ' : ''}</td>
-                    <td class="py-3 text-xs text-gray-500">${g.topNome}</td>
-                    <td class="py-3 text-xs text-gray-500">${g.outNome}</td>
+                    <td class="py-3 text-xs text-gray-500">${getFlag(g.topCod)} ${g.topNome}</td>
+                    <td class="py-3 text-xs text-gray-500">${getFlag(g.outCod)} ${g.outNome}</td>
                     <td class="py-3 text-right font-bold text-blue-900 text-base">${g.totale.toFixed(2)}</td>
                 </tr>
             `).join('');
@@ -245,9 +261,9 @@
 
                     return `
                         <div class="flex justify-between items-center bg-gray-50 px-4 py-3 rounded-xl border border-gray-100">
-                            <span class="text-sm w-2/5 text-left truncate ${vinceCasa ? 'font-extrabold text-gray-900' : 'font-semibold text-gray-800'}">${nomeCasa}</span>
+                            <span class="text-sm w-2/5 text-left truncate ${vinceCasa ? 'font-extrabold text-gray-900' : 'font-semibold text-gray-800'}">${getFlag(m.home)} ${nomeCasa}</span>
                             <div class="w-1/5 text-center flex justify-center">${pillolaRisultato}</div>
-                            <span class="text-sm w-2/5 text-right truncate ${vinceFuori ? 'font-extrabold text-gray-900' : 'font-semibold text-gray-800'}">${nomeFuori}</span>
+                            <span class="text-sm w-2/5 text-right truncate ${vinceFuori ? 'font-extrabold text-gray-900' : 'font-semibold text-gray-800'}">${nomeFuori} ${getFlag(m.away)}</span>
                         </div>
                     `;
                 }).join('');
@@ -255,11 +271,13 @@
 
             // INTERFACCIA 3: COSTRUZIONE LISTA SQUADRE REPLICA
             const grigliaSquadre = document.getElementById('griglia-squadre');
-            const squadreOrdinate = Object.values(databaseSquadre).sort((a,b) => a.fascia - b.fascia || a.ranking - b.ranking);
+            const squadreOrdinate = Object.entries(databaseSquadre)
+                .map(([cod, s]) => ({ cod, ...s }))
+                .sort((a,b) => a.fascia - b.fascia || a.ranking - b.ranking);
             grigliaSquadre.innerHTML = squadreOrdinate.map(s => `
                 <div class="flex justify-between items-center px-3 py-2.5 rounded-xl border text-xs ${s.fascia === 1 ? 'border-blue-100 bg-blue-50/20' : 'border-emerald-100 bg-emerald-50/20'}">
                     <div>
-                        <p class="font-bold text-gray-900 text-sm">${s.nome}</p>
+                        <p class="font-bold text-gray-900 text-sm">${getFlag(s.cod)} ${s.nome}</p>
                         <p class="text-gray-400 text-[11px] mt-0.5">Ranking FIFA: #${s.ranking} | Fascia ${s.fascia}ª</p>
                     </div>
                     <div class="flex gap-1 text-right">
