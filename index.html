@@ -237,15 +237,17 @@
                     const nomeFuori = databaseSquadre[m.away]?.nome || m.away;
                     
                     const giocata = (m.gol_home !== null && m.gol_home !== undefined);
-                    const pillolaRisultato = giocata 
+                    const vinceCasa  = giocata && m.gol_home > m.gol_away;
+                    const vinceFuori = giocata && m.gol_home < m.gol_away;
+                    const pillolaRisultato = giocata
                         ? `<span class="bg-blue-900 text-white font-mono text-sm px-3 py-1 rounded-md font-bold shadow-xs whitespace-nowrap">${m.gol_home} - ${m.gol_away}</span>`
                         : `<span class="bg-gray-100 text-gray-500 text-xs px-2 py-1 rounded font-medium whitespace-nowrap">Da giocare</span>`;
 
                     return `
                         <div class="flex justify-between items-center bg-gray-50 px-4 py-3 rounded-xl border border-gray-100">
-                            <span class="text-sm font-semibold w-2/5 text-left truncate text-gray-800">${nomeCasa}</span>
+                            <span class="text-sm w-2/5 text-left truncate ${vinceCasa ? 'font-extrabold text-gray-900' : 'font-semibold text-gray-800'}">${nomeCasa}</span>
                             <div class="w-1/5 text-center flex justify-center">${pillolaRisultato}</div>
-                            <span class="text-sm font-semibold w-2/5 text-right truncate text-gray-800">${nomeFuori}</span>
+                            <span class="text-sm w-2/5 text-right truncate ${vinceFuori ? 'font-extrabold text-gray-900' : 'font-semibold text-gray-800'}">${nomeFuori}</span>
                         </div>
                     `;
                 }).join('');
