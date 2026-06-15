@@ -215,7 +215,7 @@
             const corpoClassifica = document.getElementById('corpo-classifica');
             corpoClassifica.innerHTML = classificaFinal.map((g, idx) => `
                 <tr class="${idx === 0 ? 'bg-amber-50/70 font-semibold text-amber-950' : 'text-gray-700'}">
-                    <td class="py-3 text-center text-gray-400 font-mono">${idx + 1}°</td>
+                    <td class="py-3 text-center text-gray-400 font-mono">${idx + 1}</td>
                     <td class="py-3 font-medium text-gray-900">${g.nome} ${idx < 3 ? medaglie[idx] + ' ' : ''}</td>
                     <td class="py-3 text-xs text-gray-500">${g.topNome}</td>
                     <td class="py-3 text-xs text-gray-500">${g.outNome}</td>
