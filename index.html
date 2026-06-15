@@ -44,7 +44,7 @@
                                 <th class="py-2">Giocatore</th>
                                 <th class="py-2">Top (1ª)</th>
                                 <th class="py-2">Out. (2ª)</th>
-                                <th class="py-2 text-right">Pti</th>
+                                <th class="py-2 text-right">Punti</th>
                             </tr>
                         </thead>
                         <tbody id="corpo-classifica" class="text-sm divide-y divide-gray-100">
@@ -211,11 +211,12 @@
             }).sort((a, b) => b.totale - a.totale); // Ordinamento decrescente (dal 1° all'ultimo)
 
             // INTERFACCIA 1: COSTRUZIONE TABELLA CLASSIFICA
+            const medaglie = ['🥇', '🥈', '🥉'];
             const corpoClassifica = document.getElementById('corpo-classifica');
             corpoClassifica.innerHTML = classificaFinal.map((g, idx) => `
                 <tr class="${idx === 0 ? 'bg-amber-50/70 font-semibold text-amber-950' : 'text-gray-700'}">
                     <td class="py-3 text-center text-gray-400 font-mono">${idx + 1}°</td>
-                    <td class="py-3 font-medium text-gray-900">${g.nome}</td>
+                    <td class="py-3 font-medium text-gray-900">${g.nome} ${idx < 3 ? medaglie[idx] + ' ' : ''}</td>
                     <td class="py-3 text-xs text-gray-500">${g.topNome}</td>
                     <td class="py-3 text-xs text-gray-500">${g.outNome}</td>
                     <td class="py-3 text-right font-bold text-blue-900 text-base">${g.totale.toFixed(2)}</td>
