@@ -86,14 +86,14 @@
   {
     "home": "KSA",
     "away": "URU",
-    "gol_home": null,
-    "gol_away": null
+    "gol_home": 1,
+    "gol_away": 1
   },
   {
     "home": "IRN",
     "away": "NZL",
-    "gol_home": null,
-    "gol_away": null
+    "gol_home": 2,
+    "gol_away": 2
   },
   {
     "home": "FRA",
