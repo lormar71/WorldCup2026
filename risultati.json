@@ -100,5 +100,35 @@
     "away": "SEN",
     "gol_home": null,
     "gol_away": null
+  },
+  {
+    "home": "IRQ",
+    "away": "NOR",
+    "gol_home": null,
+    "gol_away": null
+  },
+  {
+    "home": "ARG",
+    "away": "ALG",
+    "gol_home": null,
+    "gol_away": null
+  },
+  {
+    "home": "AUT",
+    "away": "JOR",
+    "gol_home": null,
+    "gol_away": null
+  },
+  {
+    "home": "POR",
+    "away": "COD",
+    "gol_home": null,
+    "gol_away": null
+  },
+  {
+    "home": "ENG",
+    "away": "CRO",
+    "gol_home": null,
+    "gol_away": null
   }
 ]
