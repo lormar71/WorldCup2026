@@ -130,5 +130,17 @@
     "away": "CRO",
     "gol_home": null,
     "gol_away": null
+  },
+  {
+    "home": "UZB",
+    "away": "COL",
+    "gol_home": null,
+    "gol_away": null
+  },
+  {
+    "home": "GHA",
+    "away": "PAN",
+    "gol_home": null,
+    "gol_away": null
   }
 ]
