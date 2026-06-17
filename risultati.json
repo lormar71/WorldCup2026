@@ -122,8 +122,8 @@
   {
     "home": "POR",
     "away": "COD",
-    "gol_home": null,
-    "gol_away": null
+    "gol_home": 0,
+    "gol_away": 0
   },
   {
     "home": "ENG",
