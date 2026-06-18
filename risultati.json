@@ -154,5 +154,23 @@
     "away": "BIH",
     "gol_home": null,
     "gol_away": null
+  },
+  {
+    "home": "MEX",
+    "away": "KOR",
+    "gol_home": null,
+    "gol_away": null
+  },
+  {
+    "home": "CAN",
+    "away": "QAT",
+    "gol_home": null,
+    "gol_away": null
+  },
+  {
+    "home": "USA",
+    "away": "AUS",
+    "gol_home": null,
+    "gol_away": null
   }
 ]
