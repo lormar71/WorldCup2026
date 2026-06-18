@@ -142,5 +142,17 @@
     "away": "PAN",
     "gol_home": 1,
     "gol_away": 0
+  },
+  {
+    "home": "CZE",
+    "away": "RSA",
+    "gol_home": null,
+    "gol_away": null
+  },
+  {
+    "home": "SUI",
+    "away": "BIH",
+    "gol_home": null,
+    "gol_away": null
   }
 ]
