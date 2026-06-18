@@ -134,13 +134,13 @@
   {
     "home": "UZB",
     "away": "COL",
-    "gol_home": null,
-    "gol_away": null
+    "gol_home": 1,
+    "gol_away": 3
   },
   {
     "home": "GHA",
     "away": "PAN",
-    "gol_home": null,
-    "gol_away": null
+    "gol_home": 1,
+    "gol_away": 0
   }
 ]
