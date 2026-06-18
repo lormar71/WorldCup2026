@@ -146,8 +146,8 @@
   {
     "home": "CZE",
     "away": "RSA",
-    "gol_home": null,
-    "gol_away": null
+    "gol_home": 0,
+    "gol_away": 0
   },
   {
     "home": "SUI",
