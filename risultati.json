@@ -158,14 +158,14 @@
   {
     "home": "MEX",
     "away": "KOR",
-    "gol_home": null,
-    "gol_away": null
+    "gol_home": 1,
+    "gol_away": 0
   },
   {
     "home": "CAN",
     "away": "QAT",
-    "gol_home": null,
-    "gol_away": null
+    "gol_home": 6,
+    "gol_away": 0
   },
   {
     "home": "USA",
