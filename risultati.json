@@ -1,1 +1,198 @@
-[]
+[
+  {
+    "date": "11/06/2026",
+    "home": "MEX",
+    "away": "RSA",
+    "gol_home": 2,
+    "gol_away": 0
+  },
+  {
+    "date": "11/06/2026",
+    "home": "KOR",
+    "away": "CZE",
+    "gol_home": 2,
+    "gol_away": 1
+  },
+  {
+    "date": "12/06/2026",
+    "home": "CAN",
+    "away": "BIH",
+    "gol_home": 1,
+    "gol_away": 1
+  },
+  {
+    "date": "12/06/2026",
+    "home": "USA",
+    "away": "PAR",
+    "gol_home": 4,
+    "gol_away": 1
+  },
+  {
+    "date": "13/06/2026",
+    "home": "HTI",
+    "away": "SCO",
+    "gol_home": 0,
+    "gol_away": 1
+  },
+  {
+    "date": "13/06/2026",
+    "home": "AUS",
+    "away": "TUR",
+    "gol_home": 2,
+    "gol_away": 0
+  },
+  {
+    "date": "13/06/2026",
+    "home": "BRA",
+    "away": "MAR",
+    "gol_home": 1,
+    "gol_away": 1
+  },
+  {
+    "date": "13/06/2026",
+    "home": "QAT",
+    "away": "SUI",
+    "gol_home": 1,
+    "gol_away": 1
+  },
+  {
+    "date": "14/06/2026",
+    "home": "CIV",
+    "away": "ECU",
+    "gol_home": 1,
+    "gol_away": 0
+  },
+  {
+    "date": "14/06/2026",
+    "home": "GER",
+    "away": "CUW",
+    "gol_home": 7,
+    "gol_away": 1
+  },
+  {
+    "date": "14/06/2026",
+    "home": "NED",
+    "away": "JPN",
+    "gol_home": 2,
+    "gol_away": 2
+  },
+  {
+    "date": "14/06/2026",
+    "home": "SWE",
+    "away": "TUN",
+    "gol_home": 5,
+    "gol_away": 1
+  },
+  {
+    "date": "15/06/2026",
+    "home": "IRN",
+    "away": "NZL",
+    "gol_home": 2,
+    "gol_away": 2
+  },
+  {
+    "date": "15/06/2026",
+    "home": "ESP",
+    "away": "CPV",
+    "gol_home": 0,
+    "gol_away": 0
+  },
+  {
+    "date": "15/06/2026",
+    "home": "BEL",
+    "away": "EGY",
+    "gol_home": 1,
+    "gol_away": 1
+  },
+  {
+    "date": "15/06/2026",
+    "home": "KSA",
+    "away": "URU",
+    "gol_home": 1,
+    "gol_away": 1
+  },
+  {
+    "date": "16/06/2026",
+    "home": "FRA",
+    "away": "SEN",
+    "gol_home": 3,
+    "gol_away": 1
+  },
+  {
+    "date": "16/06/2026",
+    "home": "IRQ",
+    "away": "NOR",
+    "gol_home": 1,
+    "gol_away": 4
+  },
+  {
+    "date": "16/06/2026",
+    "home": "ARG",
+    "away": "ALG",
+    "gol_home": 3,
+    "gol_away": 0
+  },
+  {
+    "date": "16/06/2026",
+    "home": "AUT",
+    "away": "JOR",
+    "gol_home": 3,
+    "gol_away": 1
+  },
+  {
+    "date": "17/06/2026",
+    "home": "POR",
+    "away": "COD",
+    "gol_home": 1,
+    "gol_away": 1
+  },
+  {
+    "date": "17/06/2026",
+    "home": "ENG",
+    "away": "CRO",
+    "gol_home": 4,
+    "gol_away": 2
+  },
+  {
+    "date": "17/06/2026",
+    "home": "UZB",
+    "away": "COL",
+    "gol_home": 1,
+    "gol_away": 3
+  },
+  {
+    "date": "17/06/2026",
+    "home": "GHA",
+    "away": "PAN",
+    "gol_home": 1,
+    "gol_away": 0
+  },
+  {
+    "date": "18/06/2026",
+    "home": "MEX",
+    "away": "KOR",
+    "gol_home": 1,
+    "gol_away": 0
+  },
+  {
+    "date": "18/06/2026",
+    "home": "SUI",
+    "away": "BIH",
+    "gol_home": 4,
+    "gol_away": 1
+  },
+  {
+    "date": "18/06/2026",
+    "home": "CAN",
+    "away": "QAT",
+    "gol_home": 6,
+    "gol_away": 0
+  },
+  {
+    "date": "18/06/2026",
+    "home": "CZE",
+    "away": "RSA",
+    "gol_home": 1,
+    "gol_away": 1
+  }
+]
