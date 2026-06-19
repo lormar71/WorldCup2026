@@ -284,7 +284,7 @@
                         <p class="text-gray-400 text-xs mt-1">I risultati appariranno non appena aggiornerai il file JSON.</p>
                     </div>`;
             } else {
-                containerPartite.innerHTML = risultati.map(m => {
+                containerPartite.innerHTML = risultati.map((m, idx) => {
                     const nomeCasa = databaseSquadre[m.home]?.nome || m.home;
                     const nomeFuori = databaseSquadre[m.away]?.nome || m.away;
                     
@@ -297,7 +297,10 @@
 
                     return `
                         <div class="bg-gray-50 px-4 py-3 rounded-xl border border-gray-100">
-                            ${m.date ? `<div class="text-[10px] text-gray-400 mb-1.5">${m.date}</div>` : ''}
+                            <div class="text-[10px] text-gray-400 mb-1.5 flex items-center gap-2">
+                                <span class="font-mono text-gray-500">Match #${idx + 1}</span>
+                                ${m.date ? `<span>(${m.date})</span>` : ''}
+                            </div>
                             <div class="flex justify-between items-center">
                                 <span class="text-sm w-2/5 text-left truncate ${vinceCasa ? 'font-extrabold text-gray-900' : 'font-semibold text-gray-800'}">${getFlag(m.home)} ${nomeCasa}</span>
                                 <div class="w-1/5 text-center flex justify-center">${pillolaRisultato}</div>
