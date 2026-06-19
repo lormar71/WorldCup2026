@@ -244,10 +244,15 @@
             // INTERFACCIA 1: COSTRUZIONE TABELLA CLASSIFICA
             const medaglie = ['🥇', '🥈', '🥉'];
             const corpoClassifica = document.getElementById('corpo-classifica');
+            const podiumClass = [
+                'bg-amber-100/80 font-semibold text-amber-950',   // 1° oro
+                'bg-gray-100/90 font-semibold text-gray-800',      // 2° argento
+                'bg-orange-100/70 font-semibold text-orange-950',  // 3° bronzo
+            ];
             corpoClassifica.innerHTML = classificaFinal.map((g, idx) => `
-                <tr class="${idx === 0 ? 'bg-amber-50/70 font-semibold text-amber-950' : 'text-gray-700'}">
+                <tr class="${idx < 3 ? podiumClass[idx] : 'text-gray-700'}">
                     <td class="py-3 text-center text-gray-400 font-mono">${idx + 1}</td>
-                    <td class="py-3 font-medium text-gray-900">${g.nome} ${idx < 3 ? medaglie[idx] + ' ' : ''}</td>
+                    <td class="py-3 font-medium text-gray-900">${idx < 3 ? medaglie[idx] + ' ' : ''} ${g.nome}</td>
                     <td class="py-3 text-xs text-gray-500">${getFlag(g.topCod)} ${g.topNome}</td>
                     <td class="py-3 text-xs text-gray-500">${getFlag(g.outCod)} ${g.outNome}</td>
                     <td class="py-3 text-right font-bold text-blue-900 text-base">${g.totale.toFixed(2)}</td>
