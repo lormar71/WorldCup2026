@@ -172,5 +172,35 @@
     "away": "AUS",
     "gol_home": null,
     "gol_away": null
+  },
+  {
+    "home": "SCO",
+    "away": "MAR",
+    "gol_home": null,
+    "gol_away": null
+  },
+  {
+    "home": "BRA",
+    "away": "HTI",
+    "gol_home": null,
+    "gol_away": null
+  },
+  {
+    "home": "TUR",
+    "away": "PAR",
+    "gol_home": null,
+    "gol_away": null
+  },
+  {
+    "home": "GER",
+    "away": "CIV",
+    "gol_home": null,
+    "gol_away": null
+  },
+  {
+    "home": "NED",
+    "away": "SWE",
+    "gol_home": null,
+    "gol_away": null
   }
 ]
