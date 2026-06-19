@@ -194,5 +194,12 @@
     "away": "RSA",
     "gol_home": 1,
     "gol_away": 1
+  },
+  {
+    "date": "19/06/2026",
+    "home": "USA",
+    "away": "AUS",
+    "gol_home": 2,
+    "gol_away": 0
   }
 ]
