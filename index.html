@@ -275,10 +275,13 @@
                         : `<span class="bg-gray-100 text-gray-500 text-xs px-2 py-1 rounded font-medium whitespace-nowrap">Da giocare</span>`;
 
                     return `
-                        <div class="flex justify-between items-center bg-gray-50 px-4 py-3 rounded-xl border border-gray-100">
-                            <span class="text-sm w-2/5 text-left truncate ${vinceCasa ? 'font-extrabold text-gray-900' : 'font-semibold text-gray-800'}">${getFlag(m.home)} ${nomeCasa}</span>
-                            <div class="w-1/5 text-center flex justify-center">${pillolaRisultato}</div>
-                            <span class="text-sm w-2/5 text-right truncate ${vinceFuori ? 'font-extrabold text-gray-900' : 'font-semibold text-gray-800'}">${nomeFuori} ${getFlag(m.away)}</span>
+                        <div class="bg-gray-50 px-4 py-3 rounded-xl border border-gray-100">
+                            ${m.date ? `<div class="text-[10px] text-gray-400 mb-1.5">${m.date}</div>` : ''}
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm w-2/5 text-left truncate ${vinceCasa ? 'font-extrabold text-gray-900' : 'font-semibold text-gray-800'}">${getFlag(m.home)} ${nomeCasa}</span>
+                                <div class="w-1/5 text-center flex justify-center">${pillolaRisultato}</div>
+                                <span class="text-sm w-2/5 text-right truncate ${vinceFuori ? 'font-extrabold text-gray-900' : 'font-semibold text-gray-800'}">${nomeFuori} ${getFlag(m.away)}</span>
+                            </div>
                         </div>
                     `;
                 }).join('');
