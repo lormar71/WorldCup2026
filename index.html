@@ -38,9 +38,10 @@
         <!-- Navbar a tre Tab -->
         <nav class="bg-blue-950 text-sm border-t border-blue-800">
             <div class="max-w-4xl mx-auto flex justify-around">
-                <button onclick="switchTab('tab-classifica')" id="btn-tab-classifica" class="flex-1 py-3 text-center font-medium border-b-2 border-blue-400 text-white">Classifica</button>
-                <button onclick="switchTab('tab-partite')" id="btn-tab-partite" class="flex-1 py-3 text-center font-medium border-b-2 border-transparent text-gray-400">Partite</button>
-                <button onclick="switchTab('tab-squadre')" id="btn-tab-squadre" class="flex-1 py-3 text-center font-medium border-b-2 border-transparent text-gray-400">Squadre</button>
+                <button onclick="switchTab('tab-classifica')" id="btn-tab-classifica" class="flex-1 py-3 text-center font-medium border-b-2 border-blue-400 text-white text-sm">Classifica</button>
+                <button onclick="switchTab('tab-partite')" id="btn-tab-partite" class="flex-1 py-3 text-center font-medium border-b-2 border-transparent text-gray-400 text-sm">Partite</button>
+                <button onclick="switchTab('tab-squadre')" id="btn-tab-squadre" class="flex-1 py-3 text-center font-medium border-b-2 border-transparent text-gray-400 text-sm">Squadre</button>
+                <button onclick="switchTab('tab-statistiche')" id="btn-tab-statistiche" class="flex-1 py-3 text-center font-medium border-b-2 border-transparent text-gray-400 text-sm">Statistiche</button>
             </div>
         </nav>
     </header>
@@ -85,6 +86,21 @@
             <div class="bg-white rounded-xl shadow-xs p-4 border border-gray-100">
                 <h2 class="text-lg font-bold mb-4 text-gray-900">Nazionali e Moltiplicatori</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="griglia-squadre">
+                    <!-- Popolato dinamicamente da JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE 4: GRAFICO STATISTICHE SQUADRE -->
+        <section id="tab-statistiche" class="tab-content">
+            <div class="bg-white rounded-xl shadow-xs p-4 border border-gray-100">
+                <h2 class="text-lg font-bold mb-1 text-gray-900">Punti per Nazione</h2>
+                <p class="text-xs text-gray-400 mb-3">Punti pesati con i moltiplicatori di vittoria e pareggio</p>
+                <div class="flex gap-4 text-xs text-gray-500 mb-4">
+                    <span class="flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded-sm bg-blue-500"></span>Fascia 1</span>
+                    <span class="flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded-sm bg-emerald-500"></span>Fascia 2</span>
+                </div>
+                <div id="grafico-squadre" class="space-y-1.5">
                     <!-- Popolato dinamicamente da JS -->
                 </div>
             </div>
@@ -292,6 +308,9 @@
                 }).join('');
             }
 
+            // INTERFACCIA 4: GRAFICO STATISTICHE
+            renderStatistiche();
+
             // INTERFACCIA 3: COSTRUZIONE LISTA SQUADRE REPLICA
             const grigliaSquadre = document.getElementById('griglia-squadre');
             const squadreOrdinate = Object.entries(databaseSquadre)
@@ -309,6 +328,37 @@
                     </div>
                 </div>
             `).join('');
+        }
+
+        function renderStatistiche() {
+            const container = document.getElementById('grafico-squadre');
+            if (!container) return;
+
+            const squadre = Object.entries(databaseSquadre)
+                .map(([cod, s]) => ({ cod, nome: s.nome, punti: s.puntiReali || 0, fascia: s.fascia }))
+                .sort((a, b) => b.punti - a.punti);
+
+            const maxPunti = Math.max(...squadre.map(s => s.punti), 0.1);
+
+            container.innerHTML = squadre.map(s => {
+                const pct = (s.punti / maxPunti * 100).toFixed(1);
+                const hasPoints = s.punti > 0;
+                const barClass = !hasPoints ? 'bg-gray-200' : s.fascia === 1 ? 'bg-blue-500' : 'bg-emerald-500';
+                const valClass = !hasPoints ? 'text-gray-400' : s.fascia === 1 ? 'text-blue-700 font-bold' : 'text-emerald-700 font-bold';
+                return `
+                    <div class="flex items-center gap-2 text-xs group cursor-default">
+                        <div class="w-16 shrink-0 text-right leading-tight relative">
+                            ${getFlag(s.cod)} <span class="font-mono font-semibold text-gray-700">${s.cod}</span>
+                            <span class="absolute left-full ml-2 top-1/2 -translate-y-1/2 bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none z-10 transition-opacity duration-150">${s.nome}</span>
+                        </div>
+                        <div class="flex-1 bg-gray-100 rounded h-5 overflow-hidden">
+                            <div class="${barClass} h-5" style="width:${pct}%"></div>
+                        </div>
+                        <div class="w-10 text-right font-mono shrink-0 ${valClass}">
+                            ${hasPoints ? s.punti.toFixed(2) : '—'}
+                        </div>
+                    </div>`;
+            }).join('');
         }
 
         async function caricaTicker() {
