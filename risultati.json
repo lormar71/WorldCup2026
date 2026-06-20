@@ -197,9 +197,30 @@
   },
   {
     "date": "19/06/2026",
+    "home": "BRA",
+    "away": "HTI",
+    "gol_home": 3,
+    "gol_away": 0
+  },
+  {
+    "date": "19/06/2026",
+    "home": "SCO",
+    "away": "MAR",
+    "gol_home": 0,
+    "gol_away": 1
+  },
+  {
+    "date": "19/06/2026",
     "home": "USA",
     "away": "AUS",
     "gol_home": 2,
     "gol_away": 0
+  },
+  {
+    "date": "19/06/2026",
+    "home": "TUR",
+    "away": "PAR",
+    "gol_home": 0,
+    "gol_away": 1
   }
 ]
