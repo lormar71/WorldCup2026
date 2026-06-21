@@ -253,16 +253,16 @@
   },
   {
     "date": "21/06/2026",
-    "home": "ESP",
-    "away": "KSA",
-    "gol_home": 4,
+    "home": "BEL",
+    "away": "IRN",
+    "gol_home": 0,
     "gol_away": 0
   },
   {
     "date": "21/06/2026",
-    "home": "BEL",
-    "away": "IRN",
-    "gol_home": 0,
+    "home": "ESP",
+    "away": "KSA",
+    "gol_home": 4,
     "gol_away": 0
   }
 ]
