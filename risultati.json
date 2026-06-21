@@ -225,16 +225,23 @@
   },
   {
     "date": "20/06/2026",
-    "home": "NED",
-    "away": "SWE",
-    "gol_home": 5,
+    "home": "GER",
+    "away": "CIV",
+    "gol_home": 2,
     "gol_away": 1
   },
   {
     "date": "20/06/2026",
-    "home": "GER",
-    "away": "CIV",
-    "gol_home": 2,
+    "home": "ECU",
+    "away": "CUW",
+    "gol_home": 0,
+    "gol_away": 0
+  },
+  {
+    "date": "20/06/2026",
+    "home": "NED",
+    "away": "SWE",
+    "gol_home": 5,
     "gol_away": 1
   }
 ]
