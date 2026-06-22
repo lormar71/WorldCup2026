@@ -285,5 +285,12 @@
     "away": "AUT",
     "gol_home": 2,
     "gol_away": 0
+  },
+  {
+    "date": "22/06/2026",
+    "home": "FRA",
+    "away": "IRQ",
+    "gol_home": 1,
+    "gol_away": 0
   }
 ]
