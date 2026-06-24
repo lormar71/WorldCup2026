@@ -316,6 +316,20 @@
   },
   {
     "date": "23/06/2026",
+    "home": "PAN",
+    "away": "CRO",
+    "gol_home": 0,
+    "gol_away": 1
+  },
+  {
+    "date": "23/06/2026",
+    "home": "COL",
+    "away": "COD",
+    "gol_home": 1,
+    "gol_away": 0
+  },
+  {
+    "date": "23/06/2026",
     "home": "ENG",
     "away": "GHA",
     "gol_home": 0,
