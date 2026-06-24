@@ -340,13 +340,13 @@
     "home": "SUI",
     "away": "CAN",
     "gol_home": 2,
-    "gol_away": 0
+    "gol_away": 1
   },
   {
     "date": "24/06/2026",
     "home": "BIH",
     "away": "QAT",
-    "gol_home": 2,
+    "gol_home": 3,
     "gol_away": 1
   }
 ]
