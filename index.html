@@ -275,6 +275,10 @@
                 </tr>
             `).join('');
 
+            // Ordina le partite cronologicamente (dalla più vecchia alla più recente) per il rendering
+            const toDateKey = d => d ? d.split('/').reverse().join('') : '';
+            risultati.sort((a, b) => toDateKey(a.date).localeCompare(toDateKey(b.date)));
+
             // INTERFACCIA 2: COSTRUZIONE LISTA PARTITE CON MARCATURA GOL
             const containerPartite = document.getElementById('lista-partite');
             if (risultati.length === 0) {

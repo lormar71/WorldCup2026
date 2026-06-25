@@ -288,7 +288,13 @@
                 return;
             }
 
-            tbody.innerHTML = elencoPartite.map((m, idx) => {
+            const toDateKey = d => d ? d.split('/').reverse().join('') : '';
+            const sorted = elencoPartite
+                .map((m, idx) => ({ ...m, _origIdx: idx }))
+                .sort((a, b) => toDateKey(a.date).localeCompare(toDateKey(b.date)));
+
+            tbody.innerHTML = sorted.map((m) => {
+                const idx = m._origIdx;
                 const nomeCasa = databaseSquadre[m.home]?.nome || m.home;
                 const nomeFuori = databaseSquadre[m.away]?.nome || m.away;
                 const giocata = (m.gol_home !== null && m.gol_home !== undefined && m.gol_home !== "");
