@@ -418,5 +418,19 @@
     "away": "AUS",
     "gol_home": 0,
     "gol_away": 0
+  },
+  {
+    "date": "26/06/2026",
+    "home": "NOR",
+    "away": "FRA",
+    "gol_home": 0,
+    "gol_away": 1
+  },
+  {
+    "date": "26/06/2026",
+    "home": "SEN",
+    "away": "IRQ",
+    "gol_home": 1,
+    "gol_away": 0
   }
 ]
