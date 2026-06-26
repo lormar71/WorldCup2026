@@ -49,6 +49,13 @@
     "gol_away": 2
   },
   {
+    "date": "25/06/2026",
+    "home": "JPN",
+    "away": "SWE",
+    "gol_home": 1,
+    "gol_away": 1
+  },
+  {
     "date": "13/06/2026",
     "home": "HTI",
     "away": "SCO",
@@ -95,6 +102,13 @@
     "home": "CZE",
     "away": "MEX",
     "gol_home": 0,
+    "gol_away": 3
+  },
+  {
+    "date": "25/06/2026",
+    "home": "TUN",
+    "away": "NED",
+    "gol_home": 1,
     "gol_away": 3
   },
   {
@@ -222,6 +236,13 @@
     "away": "QAT",
     "gol_home": 3,
     "gol_away": 1
+  },
+  {
+    "date": "25/06/2026",
+    "home": "TUR",
+    "away": "USA",
+    "gol_home": 3,
+    "gol_away": 2
   },
   {
     "date": "11/06/2026",
@@ -357,6 +378,20 @@
     "gol_away": 0
   },
   {
+    "date": "25/06/2026",
+    "home": "CUW",
+    "away": "CIV",
+    "gol_home": 0,
+    "gol_away": 2
+  },
+  {
+    "date": "25/06/2026",
+    "home": "ECU",
+    "away": "GER",
+    "gol_home": 2,
+    "gol_away": 1
+  },
+  {
     "date": "15/06/2026",
     "home": "BEL",
     "away": "EGY",
@@ -379,16 +414,9 @@
   },
   {
     "date": "25/06/2026",
-    "home": "ECU",
-    "away": "GER",
-    "gol_home": 2,
-    "gol_away": 1
-  },
-  {
-    "date": "25/06/2026",
-    "home": "CUW",
-    "away": "CIV",
+    "home": "PAR",
+    "away": "AUS",
     "gol_home": 0,
-    "gol_away": 2
+    "gol_away": 0
   }
 ]
