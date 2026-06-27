@@ -112,6 +112,13 @@
     "gol_away": 3
   },
   {
+    "date": "26/06/2026",
+    "home": "SEN",
+    "away": "IRQ",
+    "gol_home": 5,
+    "gol_away": 0
+  },
+  {
     "date": "11/06/2026",
     "home": "KOR",
     "away": "CZE",
@@ -243,6 +250,34 @@
     "away": "USA",
     "gol_home": 3,
     "gol_away": 2
+  },
+  {
+    "date": "26/06/2026",
+    "home": "NOR",
+    "away": "FRA",
+    "gol_home": 1,
+    "gol_away": 4
+  },
+  {
+    "date": "26/06/2026",
+    "home": "EGY",
+    "away": "IRN",
+    "gol_home": 1,
+    "gol_away": 1
+  },
+  {
+    "date": "26/06/2026",
+    "home": "CPV",
+    "away": "KSA",
+    "gol_home": 0,
+    "gol_away": 0
+  },
+  {
+    "date": "26/06/2026",
+    "home": "URU",
+    "away": "ESP",
+    "gol_home": 0,
+    "gol_away": 1
   },
   {
     "date": "11/06/2026",
@@ -421,16 +456,9 @@
   },
   {
     "date": "26/06/2026",
-    "home": "NOR",
-    "away": "FRA",
+    "home": "NZL",
+    "away": "BEL",
     "gol_home": 1,
-    "gol_away": 4
-  },
-  {
-    "date": "26/06/2026",
-    "home": "SEN",
-    "away": "IRQ",
-    "gol_home": 5,
-    "gol_away": 0
+    "gol_away": 5
   }
 ]
