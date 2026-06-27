@@ -460,5 +460,19 @@
     "away": "BEL",
     "gol_home": 1,
     "gol_away": 5
+  },
+  {
+    "date": "27/06/2026",
+    "home": "CRO",
+    "away": "GHA",
+    "gol_home": 0,
+    "gol_away": 0
+  },
+  {
+    "date": "27/06/2026",
+    "home": "PAN",
+    "away": "ENG",
+    "gol_home": 0,
+    "gol_away": 0
   }
 ]
