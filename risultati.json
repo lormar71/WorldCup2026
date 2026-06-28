@@ -119,6 +119,20 @@
     "gol_away": 0
   },
   {
+    "date": "27/06/2026",
+    "home": "PAN",
+    "away": "ENG",
+    "gol_home": 0,
+    "gol_away": 2
+  },
+  {
+    "date": "27/06/2026",
+    "home": "COD",
+    "away": "UZB",
+    "gol_home": 3,
+    "gol_away": 1
+  },
+  {
     "date": "11/06/2026",
     "home": "KOR",
     "away": "CZE",
@@ -280,6 +294,13 @@
     "gol_away": 1
   },
   {
+    "date": "27/06/2026",
+    "home": "JOR",
+    "away": "ARG",
+    "gol_home": 1,
+    "gol_away": 3
+  },
+  {
     "date": "11/06/2026",
     "home": "MEX",
     "away": "RSA",
@@ -340,6 +361,13 @@
     "home": "COL",
     "away": "COD",
     "gol_home": 1,
+    "gol_away": 0
+  },
+  {
+    "date": "27/06/2026",
+    "home": "COL",
+    "away": "POR",
+    "gol_home": 0,
     "gol_away": 0
   },
   {
@@ -427,6 +455,20 @@
     "gol_away": 1
   },
   {
+    "date": "27/06/2026",
+    "home": "CRO",
+    "away": "GHA",
+    "gol_home": 2,
+    "gol_away": 1
+  },
+  {
+    "date": "27/06/2026",
+    "home": "ALG",
+    "away": "AUT",
+    "gol_home": 3,
+    "gol_away": 3
+  },
+  {
     "date": "15/06/2026",
     "home": "BEL",
     "away": "EGY",
@@ -460,19 +502,5 @@
     "away": "BEL",
     "gol_home": 1,
     "gol_away": 5
-  },
-  {
-    "date": "27/06/2026",
-    "home": "CRO",
-    "away": "GHA",
-    "gol_home": 2,
-    "gol_away": 1
-  },
-  {
-    "date": "27/06/2026",
-    "home": "PAN",
-    "away": "ENG",
-    "gol_home": 0,
-    "gol_away": 2
   }
 ]
