@@ -510,5 +510,13 @@
     "gol_home": 0,
     "gol_away": 1,
     "extra_time": 0
+  },
+  {
+    "date": "29/06/2026",
+    "home": "BRA",
+    "away": "JPN",
+    "gol_home": 2,
+    "gol_away": 1,
+    "extra_time": 0
   }
 ]
