@@ -78,6 +78,14 @@
                             </select>
                     </div>
                 </div>
+                <div id="extra-time-row" class="mt-3 hidden">
+                    <label class="block text-[11px] text-amber-400 mb-1 font-medium">Fine partita</label>
+                    <select id="match-extra-time" class="bg-gray-900 border border-amber-600/50 rounded-lg p-2 text-sm text-white focus:outline-none focus:border-amber-500">
+                        <option value="0">Tempi regolamentari (90')</option>
+                        <option value="1">Tempi supplementari (d.t.s.)</option>
+                        <option value="2">Calci di rigore (d.c.r.)</option>
+                    </select>
+                </div>
                 
                 <div class="mt-4 flex gap-2">
                     <button onclick="salvaPartita()" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-2.5 rounded-lg transition cursor-pointer">
@@ -274,6 +282,7 @@
             document.getElementById('pannello-editing').classList.remove('opacity-40', 'pointer-events-none');
             document.getElementById('pannello-salvataggio').classList.remove('opacity-40', 'pointer-events-none');
             renderTabella();
+            aggiornaVisibilitaExtraTime();
         }
 
         function bloccaPannelli() {
@@ -298,13 +307,20 @@
                 const nomeCasa = databaseSquadre[m.home]?.nome || m.home;
                 const nomeFuori = databaseSquadre[m.away]?.nome || m.away;
                 const giocata = (m.gol_home !== null && m.gol_home !== undefined && m.gol_home !== "");
+                const etBadge = m.extra_time === 1
+                    ? '<span class="inline-block mt-0.5 text-[10px] font-semibold bg-amber-500/20 text-amber-400 border border-amber-500/30 px-1.5 rounded">d.t.s.</span>'
+                    : m.extra_time === 2
+                    ? '<span class="inline-block mt-0.5 text-[10px] font-semibold bg-orange-500/20 text-orange-400 border border-orange-500/30 px-1.5 rounded">rig.</span>'
+                    : '';
                 const score = giocata ? `${m.gol_home} - ${m.gol_away}` : "Da giocare";
 
                 return `
                     <tr class="hover:bg-gray-700/30">
                         <td class="py-3 text-gray-400 text-[11px] font-mono">${m.date || '-'}</td>
                         <td class="py-3 font-semibold text-blue-300">${nomeCasa} <span class="text-[10px] text-gray-500 font-mono">(${m.home})</span></td>
-                        <td class="py-3 text-center font-mono ${giocata ? 'text-white font-bold' : 'text-gray-500'}">${score}</td>
+                        <td class="py-3 text-center font-mono ${giocata ? 'text-white font-bold' : 'text-gray-500'}">
+                            ${score}${etBadge ? `<br>${etBadge}` : ''}
+                        </td>
                         <td class="py-3 text-right font-semibold text-blue-300">${nomeFuori} <span class="text-[10px] text-gray-500 font-mono">(${m.away})</span></td>
                         <td class="py-3 text-center space-x-1 flex justify-center">
                             <button onclick="preparaModifica(${idx})" class="bg-amber-600/20 hover:bg-amber-600 text-amber-400 hover:text-white px-2 py-1 rounded transition text-[10px] font-bold cursor-pointer">EDIT</button>
@@ -328,11 +344,13 @@
                 return;
             }
 
+            const etRaw = document.getElementById('match-extra-time').value;
             const nuovaPartita = {
                 date: dateRaw ? dateRaw.split('-').reverse().join('/') : '',
                 home: home, away: away,
                 gol_home: gHomeRaw === "" ? null : parseInt(gHomeRaw),
-                gol_away: gAwayRaw === "" ? null : parseInt(gAwayRaw)
+                gol_away: gAwayRaw === "" ? null : parseInt(gAwayRaw),
+                extra_time: parseInt(etRaw) || 0
             };
 
             if (index === -1) {
@@ -353,7 +371,9 @@
             document.getElementById('match-away').value = m.away;
             document.getElementById('match-gol-home').value = m.gol_home !== null ? m.gol_home : "";
             document.getElementById('match-gol-away').value = m.gol_away !== null ? m.gol_away : "";
-            
+            document.getElementById('match-extra-time').value = m.extra_time || 0;
+            aggiornaVisibilitaExtraTime();
+
             document.getElementById('form-title').innerText = `Modifica Partita #${index + 1}`;
             document.getElementById('btn-annulla').classList.remove('hidden');
             window.scrollTo({ top: document.getElementById('pannello-editing').offsetTop - 80, behavior: 'smooth' });
@@ -373,8 +393,17 @@
             document.getElementById('match-away').selectedIndex = 1;
             document.getElementById('match-gol-home').value = "";
             document.getElementById('match-gol-away').value = "";
+            document.getElementById('match-extra-time').value = "0";
             document.getElementById('form-title').innerText = "Aggiungi Nuova Partita";
             document.getElementById('btn-annulla').classList.add('hidden');
+            aggiornaVisibilitaExtraTime();
+        }
+
+        function aggiornaVisibilitaExtraTime() {
+            const partiteGiocate = elencoPartite.length;
+            const editIndex = parseInt(document.getElementById('edit-index').value);
+            const isKnockout = editIndex === -1 ? partiteGiocate >= 72 : editIndex >= 72;
+            document.getElementById('extra-time-row').classList.toggle('hidden', !isKnockout);
         }
 
         async function inviaDatiAGitHub() {
@@ -485,10 +514,12 @@
                     });
                 });
 
-                elencoPartite = importate;
+                const esistenti = new Set(elencoPartite.map(m => `${m.home}-${m.away}`));
+                const nuove = importate.filter(m => !esistenti.has(`${m.home}-${m.away}`));
+                elencoPartite.push(...nuove);
                 renderTabella();
 
-                let msg = `✅ Importate ${importate.length} partite dall'API.`;
+                let msg = `✅ Aggiunte ${nuove.length} nuove partite (${importate.length - nuove.length} già presenti, ignorate).`;
                 if (sconosciuti.size > 0) {
                     msg += `\n\n⚠️ Squadre non riconosciute (non importate):\n${[...sconosciuti].join(', ')}`;
                 }
