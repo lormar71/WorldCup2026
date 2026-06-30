@@ -526,5 +526,13 @@
     "gol_home": 4,
     "gol_away": 5,
     "extra_time": 2
+  },
+  {
+    "date": "29/06/2026",
+    "home": "NED",
+    "away": "MAR",
+    "gol_home": 2,
+    "gol_away": 3,
+    "extra_time": 2
   }
 ]
