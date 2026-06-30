@@ -534,5 +534,13 @@
     "gol_home": 3,
     "gol_away": 4,
     "extra_time": 2
+  },
+  {
+    "date": "30/06/2026",
+    "home": "CIV",
+    "away": "NOR",
+    "gol_home": 0,
+    "gol_away": 1,
+    "extra_time": 0
   }
 ]
