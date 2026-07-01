@@ -542,5 +542,19 @@
     "gol_home": 1,
     "gol_away": 2,
     "extra_time": 0
+  },
+  {
+    "date": "30/06/2026",
+    "home": "FRA",
+    "away": "SWE",
+    "gol_home": 3,
+    "gol_away": 0
+  },
+  {
+    "date": "30/06/2026",
+    "home": "MEX",
+    "away": "ECU",
+    "gol_home": 2,
+    "gol_away": 0
   }
 ]
