@@ -587,5 +587,19 @@
     "gol_home": 3,
     "gol_away": 0,
     "extra_time": 0
+  },
+  {
+    "date": "02/07/2026",
+    "home": "POR",
+    "away": "CRO",
+    "gol_home": 2,
+    "gol_away": 1
+  },
+  {
+    "date": "02/07/2026",
+    "home": "SUI",
+    "away": "ALG",
+    "gol_home": 2,
+    "gol_away": 0
   }
 ]
