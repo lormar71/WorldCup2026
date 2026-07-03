@@ -601,5 +601,13 @@
     "away": "ALG",
     "gol_home": 2,
     "gol_away": 0
+  },
+  {
+    "date": "03/07/2026",
+    "home": "AUS",
+    "away": "EGY",
+    "gol_home": 3,
+    "gol_away": 5,
+    "extra_time": 2
   }
 ]
