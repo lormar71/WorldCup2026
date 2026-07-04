@@ -609,5 +609,20 @@
     "gol_home": 3,
     "gol_away": 5,
     "extra_time": 2
+  },
+  {
+    "date": "03/07/2026",
+    "home": "ARG",
+    "away": "CPV",
+    "gol_home": 3,
+    "gol_away": 2,
+    "extra_time": 1
+  },
+  {
+    "date": "03/07/2026",
+    "home": "COL",
+    "away": "GHA",
+    "gol_home": 1,
+    "gol_away": 0
   }
 ]
