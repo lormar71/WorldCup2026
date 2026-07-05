@@ -645,7 +645,7 @@
     "date": "05/07/2026",
     "home": "BRA",
     "away": "NOR",
-    "gol_home": 0,
+    "gol_home": 1,
     "gol_away": 2,
     "extra_time": 0
   }
