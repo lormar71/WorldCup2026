@@ -648,5 +648,12 @@
     "gol_home": 1,
     "gol_away": 2,
     "extra_time": 0
+  },
+  {
+    "date": "05/07/2026",
+    "home": "MEX",
+    "away": "ENG",
+    "gol_home": 2,
+    "gol_away": 3
   }
 ]
