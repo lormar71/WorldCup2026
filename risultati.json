@@ -663,5 +663,12 @@
     "gol_home": 0,
     "gol_away": 1,
     "extra_time": 0
+  },
+  {
+    "date": "06/07/2026",
+    "home": "USA",
+    "away": "BEL",
+    "gol_home": 1,
+    "gol_away": 4
   }
 ]
