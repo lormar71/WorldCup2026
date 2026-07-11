@@ -702,5 +702,13 @@
     "gol_home": 2,
     "gol_away": 1,
     "extra_time": 0
+  },
+  {
+    "date": "11/07/2026",
+    "home": "NOR",
+    "away": "ENG",
+    "gol_home": 1,
+    "gol_away": 1,
+    "extra_time": 0
   }
 ]
