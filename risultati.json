@@ -718,5 +718,13 @@
     "gol_home": 3,
     "gol_away": 1,
     "extra_time": 1
+  },
+  {
+    "date": "14/07/2026",
+    "home": "FRA",
+    "away": "ESP",
+    "gol_home": 0,
+    "gol_away": 1,
+    "extra_time": 0
   }
 ]
