@@ -742,5 +742,13 @@
     "gol_home": 4,
     "gol_away": 6,
     "extra_time": 0
+  },
+  {
+    "date": "19/07/2026",
+    "home": "ESP",
+    "away": "ARG",
+    "gol_home": 0,
+    "gol_away": 0,
+    "extra_time": 0
   }
 ]
